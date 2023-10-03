@@ -1,4 +1,4 @@
-// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/h1/Hello.g4 by ANTLR 4.13.1
+// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/h0/Hello.g4 by ANTLR 4.13.1
 package hello;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -103,6 +103,11 @@ public class HelloParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitR(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitR(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 

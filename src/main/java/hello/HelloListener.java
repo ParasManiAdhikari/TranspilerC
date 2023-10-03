@@ -1,4 +1,4 @@
-// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/h1/Hello.g4 by ANTLR 4.13.1
+// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/h0/Hello.g4 by ANTLR 4.13.1
 package hello;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
