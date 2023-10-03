@@ -4,4 +4,4 @@ command : 'line' 'from' point 'to' point ;
 point : INT ',' INT ; // E.g., "0,10"
 INT : '0'..'9'+ ; // lexer rule to match 1-or-more digits
 /** Skip whitespace */
-WS : (' ' | '\t' | '\r' | '\n') {skip();} ;
+WS : [ \t\r\n]+ -> skip ;
