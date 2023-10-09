@@ -1,4 +1,4 @@
-package vsys;
+package script;
 public abstract class Stream<A> {
     private static Stream EMPTY = new Empty();
     public abstract A head();

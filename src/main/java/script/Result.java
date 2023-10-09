@@ -1,4 +1,4 @@
-package vsys;
+package script;
 
 //import io.IO;
 

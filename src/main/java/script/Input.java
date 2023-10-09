@@ -1,6 +1,4 @@
-package lexikalische_filter;
-
-import vsys.*;
+package script;
 
 public interface Input<A> extends AutoCloseable {
     Result<Tuple<A, Input<A>>> read();

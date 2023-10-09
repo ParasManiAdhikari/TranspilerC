@@ -1,10 +1,9 @@
 package ip;
 
-import h1.TIMELexer;
-import lexikalische_filter.Input;
-import lexikalische_filter.TokenReader;
+import script.Input;
+import script.TokenReader;
 import org.antlr.v4.runtime.Token;
-import vsys.Result;
+import script.Result;
 
 import java.io.IOException;
 
@@ -13,7 +12,7 @@ public class Test {
         String input = "./src/main/java/ip/test.txt";
         Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, IPLexer::new);
         rTokenReader.forEach(rt -> rt.stream().forEach(t -> {
-            if(t.getType() == IPLexer.Interprotokol)
+            if(t.getType() == IPLexer.IP)
                 System.out.printf("IP FOUND %s\n", t.getText());
 //            else if (t.getType() == TIMELexer.Hour) {
 //                System.out.printf("HOUR FOUND %s\n", t.getText());

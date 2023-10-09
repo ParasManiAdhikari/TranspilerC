@@ -1,4 +1,4 @@
-package vsys;
+package script;
 
 public interface Callable<A> {
   A call() throws Exception;

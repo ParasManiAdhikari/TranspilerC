@@ -1,7 +1,6 @@
-package lexikalische_filter;
+package script;
 
 import org.antlr.v4.runtime.*;
-import vsys.*;
 
 import java.io.IOException;
 

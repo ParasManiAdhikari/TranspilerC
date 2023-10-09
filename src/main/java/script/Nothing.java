@@ -1,4 +1,4 @@
-package vsys;
+package script;
 
 public final class Nothing {
   public static final Nothing instance = new Nothing();

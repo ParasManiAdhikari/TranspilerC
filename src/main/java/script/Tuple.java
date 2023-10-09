@@ -1,4 +1,4 @@
-package vsys;
+package script;
 
 import java.io.Serializable;
 import java.util.Objects;

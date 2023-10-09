@@ -1,5 +1,5 @@
-// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/lexikalische_filter_g4/TIMELexer.g4 by ANTLR 4.13.1
-package h1;
+// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/lexikalische_filter/TIMELexer.g4 by ANTLR 4.13.1
+package time;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

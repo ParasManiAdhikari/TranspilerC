@@ -1,12 +1,11 @@
-package lexikalische_filter;
+package sat;
 
-import h1.TIMELexer;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
+import time.TIMELexer;
 import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.ParseTree;
-import vsys.Effect;
-import vsys.Result;
+import script.Effect;
+import script.Input;
+import script.Result;
+import script.TokenReader;
 
 import java.io.IOException;
 
@@ -21,8 +20,8 @@ public class Main {
         }
     };
     public static void main(String[] args) throws IOException {
-        String input = "./src/main/java/h1/test.txt";
-        Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, TIMELexer::new);
+        String input = "./src/main/java/sat/test.txt";
+        Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, SATLexer::new);
         rTokenReader.forEach(rt -> rt.stream().forEach(f));
     }
 }

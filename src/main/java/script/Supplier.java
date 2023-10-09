@@ -1,4 +1,4 @@
-package vsys;
+package script;
 
 public interface Supplier<A> {
   A get();
