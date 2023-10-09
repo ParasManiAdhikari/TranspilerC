@@ -1,5 +1,5 @@
 lexer grammar TIMELexer;
-ID : Hour Colon Minute (Colon Sekunden) ?;
+TIME : Hour Colon Minute (Colon Sekunden) ?;
 Hour : [0-1] DIGIT | [2] [0-3];
 Minute :  [0] DIGIT | [1-5] DIGIT;
 Sekunden :  [0] DIGIT | [1-5] DIGIT;

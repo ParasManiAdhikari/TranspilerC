@@ -1,8 +1,10 @@
 package lexikalische_filter;
 
+import h1.TIMELexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
 import vsys.Effect;
 import vsys.Result;
 
@@ -19,8 +21,8 @@ public class Main {
         }
     };
     public static void main(String[] args) throws IOException {
-        String input = "./src/main/java/lexikalische_filter/test.txt";
-        Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, SATLexer::new);
+        String input = "./src/main/java/h1/test.txt";
+        Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, TIMELexer::new);
         rTokenReader.forEach(rt -> rt.stream().forEach(f));
     }
 }
