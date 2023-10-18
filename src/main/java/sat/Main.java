@@ -1,6 +1,5 @@
 package sat;
 
-import time.TIMELexer;
 import org.antlr.v4.runtime.Token;
 import script.Effect;
 import script.Input;

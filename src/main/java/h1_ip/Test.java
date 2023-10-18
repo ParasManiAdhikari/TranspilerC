@@ -1,4 +1,4 @@
-package ip;
+package h1_ip;
 
 import script.Input;
 import script.TokenReader;
@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Test {
     public static void main(String[] args) throws IOException {
-        String input = "./src/main/java/ip/test.txt";
+        String input = "./src/main/java/h1_ip/test.txt";
         Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, IPLexer::new);
         rTokenReader.forEach(rt -> rt.stream().forEach(t -> {
             if(t.getType() == IPLexer.IP)

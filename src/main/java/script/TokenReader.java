@@ -19,7 +19,6 @@ public class TokenReader implements Input<Token> {
         } catch (IOException e) {
             return Result.failure("Error reading the file: " + e.getMessage());
         }
-        //return Result.of(() -> new TokenReader(lexer.apply(CharStreams.fromFileName(filename))));
     }
     @Override
     public Result<Tuple<Token, Input<Token>>> read() {
