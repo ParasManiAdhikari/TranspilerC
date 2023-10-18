@@ -7,12 +7,11 @@ public abstract class Stream<A> {
 
     // Input Output Aufgabe
     public abstract void forEach(Effect<A> ef);
-
+    public abstract <B> B foldRight(Supplier<B> z,
+                                    Function<A, Function<Supplier<B>, B>> f);
     private Stream() {}
 
     private static class Empty<A> extends Stream<A> {
-
-
         @Override
         public Stream<A> tail() {
             throw new IllegalStateException("tail called on empty");
@@ -32,6 +31,11 @@ public abstract class Stream<A> {
         @Override
         public void forEach(Effect<A> ef) {
 
+        }
+
+        @Override
+        public <B> B foldRight(Supplier<B> s, Function<A, Function<Supplier<B>, B>> f) {
+            return s.get();
         }
 
 
@@ -70,6 +74,11 @@ public abstract class Stream<A> {
         public void forEach(Effect<A> ef) {
             ef.apply(this.head());
             this.tail().forEach(ef);
+        }
+
+        @Override
+        public <B> B foldRight(Supplier<B> s, Function<A, Function<Supplier<B>, B>> f) {
+            return f.apply(head()).apply(() -> tail().foldRight(s, f));
         }
     }
     static <A> Stream<A> cons(Supplier<A> hd, Supplier<Stream<A>> tl) {
