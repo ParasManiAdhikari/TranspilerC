@@ -31,6 +31,11 @@ IPTest:
   script:
     - mvn -Dtest=h1.IPTest test
 
+TimeTest:
+  stage: test
+  script:
+    - mvn -Dtest=h1.TimeTest test
+
 deploy-prod:
   stage: deploy
   script:
