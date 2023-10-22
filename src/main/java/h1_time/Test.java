@@ -11,11 +11,7 @@ public class Test {
         String input = "./src/main/java/h1_time/test.txt";
         Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, TIMELexer::new);
         rTokenReader.forEach(rt -> rt.stream().forEach(t -> {
-            if(t.getType() == TIMELexer.TIME)
-            System.out.printf("TIME FOUND %s\n", t.getText());
-            else if (t.getType() == TIMELexer.Hour) {
-                System.out.printf("HOUR FOUND %s\n", t.getText());
-            }
+            if(t.getType() == TIMELexer.TIME) System.out.printf("TIME FOUND %s\n", t.getText());
         }));
     }
 }

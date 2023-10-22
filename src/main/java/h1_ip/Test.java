@@ -11,9 +11,9 @@ public class Test {
     public static void main(String[] args) throws IOException {
         String input = "./src/main/java/h1_ip/test.txt";
         Result<Input<Token>> rTokenReader = TokenReader.lexFile(input, IPLexer::new);
-        rTokenReader.forEach(rt -> rt.stream().forEach(t -> {
-            if(t.getType() == IPLexer.IP)
-                System.out.printf("IP FOUND %s\n", t.getText());
+        rTokenReader.forEach(rt -> rt.stream().forEach(token -> {
+            if (token.getType() == IPLexer.IP)
+                System.out.printf("IP FOUND %s\n", token.getText());
 //            else if (t.getType() == TIMELexer.Hour) {
 //                System.out.printf("HOUR FOUND %s\n", t.getText());
 //            }

@@ -26,10 +26,10 @@ test:
     - echo "Running tests..."
     # Add your test commands here.
 
-#EchoActor:
-#  stage: test
-#  script:
-#    - mvn -Dtest=echo.actor.EchoActorTest test
+IPTest:
+  stage: test
+  script:
+    - mvn -Dtest=h1.IPTest test
 
 deploy-prod:
   stage: deploy
