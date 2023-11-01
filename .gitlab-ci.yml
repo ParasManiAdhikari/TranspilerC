@@ -36,6 +36,11 @@ TimeTest:
   script:
     - mvn -Dtest=h1.TimeTest test
 
+G6Test:
+  stage: test
+  script:
+    - mvn -Dtest=h3.G6Test test
+
 deploy-prod:
   stage: deploy
   script:
