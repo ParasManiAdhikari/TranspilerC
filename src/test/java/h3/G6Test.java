@@ -13,7 +13,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class G6Test {
-    String expected = "(prog (stat (expr (expr (term (term (term (fact 10)) * (fact 2)) / (fact 2))) + (term (fact 4))) \\r\\n))";
+    String expected = "(prog (stat (expr (expr (term (term (term (fact 10)) * (fact 2)) / (fact 2))) + (term (fact 4))) \\n))";
     @Test
     void g6Test() throws IOException {
         CharStream a = CharStreams.fromFileName("./src/main/java/h3_g6/test.txt");
