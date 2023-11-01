@@ -17,7 +17,7 @@ public class G6Parser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, NEWLINE=7, ID=8, INT=9, 
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, ID=7, INT=8, NEWLINE=9, 
 		WS=10;
 	public static final int
 		RULE_prog = 0, RULE_stat = 1, RULE_expr = 2, RULE_term = 3, RULE_fact = 4;
@@ -36,7 +36,7 @@ public class G6Parser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, "NEWLINE", "ID", "INT", "WS"
+			null, null, null, null, null, null, null, "ID", "INT", "NEWLINE", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -174,10 +174,10 @@ public class G6Parser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class StatContext extends ParserRuleContext {
+		public TerminalNode NEWLINE() { return getToken(G6Parser.NEWLINE, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode NEWLINE() { return getToken(G6Parser.NEWLINE, 0); }
 		public StatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -204,20 +204,20 @@ public class G6Parser extends Parser {
 			setState(24);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__4:
-			case INT:
+			case NEWLINE:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(20);
-				expr(0);
-				setState(21);
 				match(NEWLINE);
 				}
 				break;
-			case NEWLINE:
+			case T__4:
+			case INT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(23);
+				setState(21);
+				expr(0);
+				setState(22);
 				match(NEWLINE);
 				}
 				break;
@@ -296,7 +296,7 @@ public class G6Parser extends Parser {
 					_localctx = new ExprContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_expr);
 					setState(29);
-					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
 					setState(30);
 					_la = _input.LA(1);
 					if ( !(_la==T__0 || _la==T__1) ) {
@@ -389,7 +389,7 @@ public class G6Parser extends Parser {
 					_localctx = new TermContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_term);
 					setState(40);
-					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
 					setState(41);
 					_la = _input.LA(1);
 					if ( !(_la==T__2 || _la==T__3) ) {
@@ -424,10 +424,10 @@ public class G6Parser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FactContext extends ParserRuleContext {
+		public TerminalNode INT() { return getToken(G6Parser.INT, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode INT() { return getToken(G6Parser.INT, 0); }
 		public FactContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -454,22 +454,22 @@ public class G6Parser extends Parser {
 			setState(53);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__4:
+			case INT:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(48);
-				match(T__4);
-				setState(49);
-				expr(0);
-				setState(50);
-				match(T__5);
+				match(INT);
 				}
 				break;
-			case INT:
+			case T__4:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(52);
-				match(INT);
+				setState(49);
+				match(T__4);
+				setState(50);
+				expr(0);
+				setState(51);
+				match(T__5);
 				}
 				break;
 			default:
@@ -508,14 +508,14 @@ public class G6Parser extends Parser {
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 1:
-			return precpred(_ctx, 2);
+			return precpred(_ctx, 1);
 		}
 		return true;
 	}
 	private boolean term_sempred(TermContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 2:
-			return precpred(_ctx, 2);
+			return precpred(_ctx, 1);
 		}
 		return true;
 	}
@@ -539,23 +539,23 @@ public class G6Parser extends Parser {
 		"\u000e\u0010\u0003\u0002\u0001\u0000\u000f\r\u0001\u0000\u0000\u0000\u0010"+
 		"\u0013\u0001\u0000\u0000\u0000\u0011\u000f\u0001\u0000\u0000\u0000\u0011"+
 		"\u0012\u0001\u0000\u0000\u0000\u0012\u0001\u0001\u0000\u0000\u0000\u0013"+
-		"\u0011\u0001\u0000\u0000\u0000\u0014\u0015\u0003\u0004\u0002\u0000\u0015"+
-		"\u0016\u0005\u0007\u0000\u0000\u0016\u0019\u0001\u0000\u0000\u0000\u0017"+
-		"\u0019\u0005\u0007\u0000\u0000\u0018\u0014\u0001\u0000\u0000\u0000\u0018"+
-		"\u0017\u0001\u0000\u0000\u0000\u0019\u0003\u0001\u0000\u0000\u0000\u001a"+
-		"\u001b\u0006\u0002\uffff\uffff\u0000\u001b\u001c\u0003\u0006\u0003\u0000"+
-		"\u001c\"\u0001\u0000\u0000\u0000\u001d\u001e\n\u0002\u0000\u0000\u001e"+
-		"\u001f\u0007\u0000\u0000\u0000\u001f!\u0003\u0006\u0003\u0000 \u001d\u0001"+
-		"\u0000\u0000\u0000!$\u0001\u0000\u0000\u0000\" \u0001\u0000\u0000\u0000"+
-		"\"#\u0001\u0000\u0000\u0000#\u0005\u0001\u0000\u0000\u0000$\"\u0001\u0000"+
-		"\u0000\u0000%&\u0006\u0003\uffff\uffff\u0000&\'\u0003\b\u0004\u0000\'"+
-		"-\u0001\u0000\u0000\u0000()\n\u0002\u0000\u0000)*\u0007\u0001\u0000\u0000"+
-		"*,\u0003\b\u0004\u0000+(\u0001\u0000\u0000\u0000,/\u0001\u0000\u0000\u0000"+
-		"-+\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000.\u0007\u0001\u0000"+
-		"\u0000\u0000/-\u0001\u0000\u0000\u000001\u0005\u0005\u0000\u000012\u0003"+
-		"\u0004\u0002\u000023\u0005\u0006\u0000\u000036\u0001\u0000\u0000\u0000"+
-		"46\u0005\t\u0000\u000050\u0001\u0000\u0000\u000054\u0001\u0000\u0000\u0000"+
-		"6\t\u0001\u0000\u0000\u0000\u0005\u0011\u0018\"-5";
+		"\u0011\u0001\u0000\u0000\u0000\u0014\u0019\u0005\t\u0000\u0000\u0015\u0016"+
+		"\u0003\u0004\u0002\u0000\u0016\u0017\u0005\t\u0000\u0000\u0017\u0019\u0001"+
+		"\u0000\u0000\u0000\u0018\u0014\u0001\u0000\u0000\u0000\u0018\u0015\u0001"+
+		"\u0000\u0000\u0000\u0019\u0003\u0001\u0000\u0000\u0000\u001a\u001b\u0006"+
+		"\u0002\uffff\uffff\u0000\u001b\u001c\u0003\u0006\u0003\u0000\u001c\"\u0001"+
+		"\u0000\u0000\u0000\u001d\u001e\n\u0001\u0000\u0000\u001e\u001f\u0007\u0000"+
+		"\u0000\u0000\u001f!\u0003\u0006\u0003\u0000 \u001d\u0001\u0000\u0000\u0000"+
+		"!$\u0001\u0000\u0000\u0000\" \u0001\u0000\u0000\u0000\"#\u0001\u0000\u0000"+
+		"\u0000#\u0005\u0001\u0000\u0000\u0000$\"\u0001\u0000\u0000\u0000%&\u0006"+
+		"\u0003\uffff\uffff\u0000&\'\u0003\b\u0004\u0000\'-\u0001\u0000\u0000\u0000"+
+		"()\n\u0001\u0000\u0000)*\u0007\u0001\u0000\u0000*,\u0003\b\u0004\u0000"+
+		"+(\u0001\u0000\u0000\u0000,/\u0001\u0000\u0000\u0000-+\u0001\u0000\u0000"+
+		"\u0000-.\u0001\u0000\u0000\u0000.\u0007\u0001\u0000\u0000\u0000/-\u0001"+
+		"\u0000\u0000\u000006\u0005\b\u0000\u000012\u0005\u0005\u0000\u000023\u0003"+
+		"\u0004\u0002\u000034\u0005\u0006\u0000\u000046\u0001\u0000\u0000\u0000"+
+		"50\u0001\u0000\u0000\u000051\u0001\u0000\u0000\u00006\t\u0001\u0000\u0000"+
+		"\u0000\u0005\u0011\u0018\"-5";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

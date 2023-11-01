@@ -15,3 +15,6 @@ public class Test {
         System.out.println(tree.toStringTree(parser));
     }
 }
+
+// <(prog (stat (expr (expr (term (term (term (fact 10)) * (fact 2)) / (fact 2))) + (term (fact 4))) \n))>
+// <(prog (stat (expr (expr (term (term (term (fact 10)) * (fact 2)) / (fact 2))) + (term (fact 4))) \r\n))>
