@@ -1,7 +1,7 @@
 package h3;
 
-import h3_exprit.ExpritLexer;
-import h3_exprit.ExpritParser;
+import h3_expr.ExprLexer;
+import h3_expr.ExprParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -13,17 +13,19 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ExpritTest {
-    String expected = "(prog (stat (expr (term (fact 10) * (fact 2) / (fact 2)) + (term (fact 4))) \\n))";
+public class ExprTest {
+    String expected = "(prog (stat (expr (expr (expr 10) * (expr 2)) / (expr (expr 2) + (expr 4))) \\n))";
+
     @ParameterizedTest
     @ValueSource(strings = {"10 * 2 / 2 + 4\n"})
-    void expritTest(String input) throws IOException {
+    void exprTest(String input) throws IOException {
         CharStream a = CharStreams.fromString(input);
-        ExpritLexer lexer = new ExpritLexer(a);
+        ExprLexer lexer = new ExprLexer(a);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        ExpritParser parser = new ExpritParser(tokens);
+        ExprParser parser = new ExprParser(tokens);
         ParseTree tree = parser.prog();
         String actual = tree.toStringTree(parser);
         assertEquals(actual, expected);
     }
+
 }
