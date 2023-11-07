@@ -41,6 +41,16 @@ G6Test:
   script:
     - mvn -Dtest=h3.G6Test test
 
+ExpritTest:
+  stage: test
+  script:
+    - mvn -Dtest=h3.ExpritTest test
+
+ExprTest:
+  stage: test
+  script:
+    - mvn -Dtest=h3.ExprTest test
+
 deploy-prod:
   stage: deploy
   script:
