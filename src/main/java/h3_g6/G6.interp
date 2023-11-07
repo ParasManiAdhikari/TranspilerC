@@ -8,7 +8,7 @@ null
 ')'
 null
 null
-'\n'
+null
 null
 
 token symbolic names:
@@ -21,7 +21,7 @@ null
 null
 ID
 INT
-NEWLINE
+NL
 WS
 
 rule names:

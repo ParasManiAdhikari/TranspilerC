@@ -17,8 +17,7 @@ public class G6Parser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, ID=7, INT=8, NEWLINE=9, 
-		WS=10;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, ID=7, INT=8, NL=9, WS=10;
 	public static final int
 		RULE_prog = 0, RULE_stat = 1, RULE_expr = 2, RULE_term = 3, RULE_fact = 4;
 	private static String[] makeRuleNames() {
@@ -30,13 +29,13 @@ public class G6Parser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'+'", "'-'", "'*'", "'/'", "'('", "')'", null, null, "'\\n'"
+			null, "'+'", "'-'", "'*'", "'/'", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, "ID", "INT", "NEWLINE", "WS"
+			null, null, null, null, null, null, null, "ID", "INT", "NL", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -174,7 +173,7 @@ public class G6Parser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class StatContext extends ParserRuleContext {
-		public TerminalNode NEWLINE() { return getToken(G6Parser.NEWLINE, 0); }
+		public TerminalNode NL() { return getToken(G6Parser.NL, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -204,11 +203,11 @@ public class G6Parser extends Parser {
 			setState(24);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case NEWLINE:
+			case NL:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(20);
-				match(NEWLINE);
+				match(NL);
 				}
 				break;
 			case T__4:
@@ -218,7 +217,7 @@ public class G6Parser extends Parser {
 				setState(21);
 				expr(0);
 				setState(22);
-				match(NEWLINE);
+				match(NL);
 				}
 				break;
 			default:
