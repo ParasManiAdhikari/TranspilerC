@@ -14,7 +14,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExprTest {
-    String expected = "(prog (stat (expr (expr (expr 10) * (expr 2)) / (expr (expr 2) + (expr 4))) \\n))";
+    String expected = "(prog (stat (expr (expr (expr (expr 10) * (expr 2)) / (expr 2)) + (expr 4)) \\n))";
 
     @ParameterizedTest
     @ValueSource(strings = {"10 * 2 / 2 + 4\n"})

@@ -29,7 +29,7 @@ public class ExprParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'+'", "'-'", "'*'", "'/'", "'('", "')'"
+			null, "'('", "')'", "'*'", "'/'", "'+'", "'-'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -136,7 +136,7 @@ public class ExprParser extends Parser {
 				setState(9); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 800L) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 770L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -182,7 +182,7 @@ public class ExprParser extends Parser {
 			setState(15);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__4:
+			case T__0:
 			case INT:
 				enterOuterAlt(_localctx, 1);
 				{
@@ -267,14 +267,14 @@ public class ExprParser extends Parser {
 				match(INT);
 				}
 				break;
-			case T__4:
+			case T__0:
 				{
 				setState(19);
-				match(T__4);
+				match(T__0);
 				setState(20);
 				expr(0);
 				setState(21);
-				match(T__5);
+				match(T__1);
 				}
 				break;
 			default:
@@ -297,28 +297,8 @@ public class ExprParser extends Parser {
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(25);
-						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(26);
-						_la = _input.LA(1);
-						if ( !(_la==T__0 || _la==T__1) ) {
-						_errHandler.recoverInline(this);
-						}
-						else {
-							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-							_errHandler.reportMatch(this);
-							consume();
-						}
-						setState(27);
-						expr(4);
-						}
-						break;
-					case 2:
-						{
-						_localctx = new ExprContext(_parentctx, _parentState);
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(28);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(29);
+						setState(26);
 						_la = _input.LA(1);
 						if ( !(_la==T__2 || _la==T__3) ) {
 						_errHandler.recoverInline(this);
@@ -328,8 +308,28 @@ public class ExprParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(30);
+						setState(27);
 						expr(3);
+						}
+						break;
+					case 2:
+						{
+						_localctx = new ExprContext(_parentctx, _parentState);
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(28);
+						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
+						setState(29);
+						_la = _input.LA(1);
+						if ( !(_la==T__4 || _la==T__5) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(30);
+						expr(2);
 						}
 						break;
 					}
@@ -362,9 +362,9 @@ public class ExprParser extends Parser {
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 3);
-		case 1:
 			return precpred(_ctx, 2);
+		case 1:
+			return precpred(_ctx, 1);
 		}
 		return true;
 	}
@@ -377,7 +377,7 @@ public class ExprParser extends Parser {
 		"\u0002\u0003\u0002\u0018\b\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001"+
 		"\u0002\u0001\u0002\u0001\u0002\u0005\u0002 \b\u0002\n\u0002\f\u0002#\t"+
 		"\u0002\u0001\u0002\u0000\u0001\u0004\u0003\u0000\u0002\u0004\u0000\u0002"+
-		"\u0001\u0000\u0001\u0002\u0001\u0000\u0003\u0004&\u0000\u0007\u0001\u0000"+
+		"\u0001\u0000\u0003\u0004\u0001\u0000\u0005\u0006&\u0000\u0007\u0001\u0000"+
 		"\u0000\u0000\u0002\u000f\u0001\u0000\u0000\u0000\u0004\u0017\u0001\u0000"+
 		"\u0000\u0000\u0006\b\u0003\u0002\u0001\u0000\u0007\u0006\u0001\u0000\u0000"+
 		"\u0000\b\t\u0001\u0000\u0000\u0000\t\u0007\u0001\u0000\u0000\u0000\t\n"+
@@ -386,13 +386,13 @@ public class ExprParser extends Parser {
 		"\u000e\u0010\u0005\t\u0000\u0000\u000f\u000b\u0001\u0000\u0000\u0000\u000f"+
 		"\u000e\u0001\u0000\u0000\u0000\u0010\u0003\u0001\u0000\u0000\u0000\u0011"+
 		"\u0012\u0006\u0002\uffff\uffff\u0000\u0012\u0018\u0005\b\u0000\u0000\u0013"+
-		"\u0014\u0005\u0005\u0000\u0000\u0014\u0015\u0003\u0004\u0002\u0000\u0015"+
-		"\u0016\u0005\u0006\u0000\u0000\u0016\u0018\u0001\u0000\u0000\u0000\u0017"+
+		"\u0014\u0005\u0001\u0000\u0000\u0014\u0015\u0003\u0004\u0002\u0000\u0015"+
+		"\u0016\u0005\u0002\u0000\u0000\u0016\u0018\u0001\u0000\u0000\u0000\u0017"+
 		"\u0011\u0001\u0000\u0000\u0000\u0017\u0013\u0001\u0000\u0000\u0000\u0018"+
-		"!\u0001\u0000\u0000\u0000\u0019\u001a\n\u0003\u0000\u0000\u001a\u001b"+
-		"\u0007\u0000\u0000\u0000\u001b \u0003\u0004\u0002\u0004\u001c\u001d\n"+
-		"\u0002\u0000\u0000\u001d\u001e\u0007\u0001\u0000\u0000\u001e \u0003\u0004"+
-		"\u0002\u0003\u001f\u0019\u0001\u0000\u0000\u0000\u001f\u001c\u0001\u0000"+
+		"!\u0001\u0000\u0000\u0000\u0019\u001a\n\u0002\u0000\u0000\u001a\u001b"+
+		"\u0007\u0000\u0000\u0000\u001b \u0003\u0004\u0002\u0003\u001c\u001d\n"+
+		"\u0001\u0000\u0000\u001d\u001e\u0007\u0001\u0000\u0000\u001e \u0003\u0004"+
+		"\u0002\u0002\u001f\u0019\u0001\u0000\u0000\u0000\u001f\u001c\u0001\u0000"+
 		"\u0000\u0000 #\u0001\u0000\u0000\u0000!\u001f\u0001\u0000\u0000\u0000"+
 		"!\"\u0001\u0000\u0000\u0000\"\u0005\u0001\u0000\u0000\u0000#!\u0001\u0000"+
 		"\u0000\u0000\u0005\t\u000f\u0017\u001f!";
