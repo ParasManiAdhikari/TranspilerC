@@ -1,5 +1,5 @@
 // Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/syntaxgesteuerte/CalculatorV.g4 by ANTLR 4.13.1
-package h4_calcV;
+package h4_calculator;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**

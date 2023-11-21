@@ -1,13 +1,10 @@
 // Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/syntaxgesteuerte/CalculatorV.g4 by ANTLR 4.13.1
-package h4_calcV;
+package h4_calculator;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class CalculatorVParser extends Parser {
@@ -628,7 +625,7 @@ public class CalculatorVParser extends Parser {
 						setState(42);
 						match(POWER);
 						setState(43);
-						expr(8);
+						expr(7);
 						}
 						break;
 					case 2:
@@ -787,7 +784,7 @@ public class CalculatorVParser extends Parser {
 		"\u0000$(\u0001\u0000\u0000\u0000%(\u0005\u0007\u0000\u0000&(\u0005\b\u0000"+
 		"\u0000\' \u0001\u0000\u0000\u0000\'%\u0001\u0000\u0000\u0000\'&\u0001"+
 		"\u0000\u0000\u0000(=\u0001\u0000\u0000\u0000)*\n\u0007\u0000\u0000*+\u0005"+
-		"\u0010\u0000\u0000+<\u0003\u0004\u0002\b,-\n\u0006\u0000\u0000-.\u0007"+
+		"\u0010\u0000\u0000+<\u0003\u0004\u0002\u0007,-\n\u0006\u0000\u0000-.\u0007"+
 		"\u0000\u0000\u0000.<\u0003\u0004\u0002\u0007/0\n\u0005\u0000\u000001\u0007"+
 		"\u0001\u0000\u00001<\u0003\u0004\u0002\u000623\n\u0004\u0000\u000034\u0007"+
 		"\u0002\u0000\u00004<\u0003\u0004\u0002\u000556\n\u0003\u0000\u000067\u0005"+

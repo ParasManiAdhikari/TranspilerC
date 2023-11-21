@@ -1,4 +1,4 @@
-package h4_calcV;
+package h4_calculator;
 
 import java.util.*;
 
@@ -53,7 +53,7 @@ public class EvalVisitor extends CalculatorVBaseVisitor<Integer>{
         return value;
     }
 
-    /** COMPARE BOOLEAN */
+    /** expr op=(EQUALS | GREATER | SMALLER) expr */
     @Override
     public Integer visitCompare(CalculatorVParser.CompareContext ctx) {
         int left = visit(ctx.expr(0)); // get value of left subexpression

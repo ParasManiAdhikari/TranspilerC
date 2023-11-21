@@ -1,9 +1,9 @@
 package h4;
 
 
-import h4_calcV.CalculatorVLexer;
-import h4_calcV.CalculatorVParser;
-import h4_calcV.EvalVisitor;
+import h4_calculator.CalculatorVLexer;
+import h4_calculator.CalculatorVParser;
+import h4_calculator.EvalVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CalcVisitor {
+public class calcVisitor {
 
     String expected = "20";
     @ParameterizedTest
