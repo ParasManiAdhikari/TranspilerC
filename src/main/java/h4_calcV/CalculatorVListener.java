@@ -126,6 +126,18 @@ public interface CalculatorVListener extends ParseTreeListener {
 	 */
 	void exitAddSub(CalculatorVParser.AddSubContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code bedingte}
+	 * labeled alternative in {@link CalculatorVParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterBedingte(CalculatorVParser.BedingteContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code bedingte}
+	 * labeled alternative in {@link CalculatorVParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitBedingte(CalculatorVParser.BedingteContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code id}
 	 * labeled alternative in {@link CalculatorVParser#expr}.
 	 * @param ctx the parse tree

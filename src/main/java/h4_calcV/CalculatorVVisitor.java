@@ -80,6 +80,13 @@ public interface CalculatorVVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAddSub(CalculatorVParser.AddSubContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code bedingte}
+	 * labeled alternative in {@link CalculatorVParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBedingte(CalculatorVParser.BedingteContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code id}
 	 * labeled alternative in {@link CalculatorVParser#expr}.
 	 * @param ctx the parse tree

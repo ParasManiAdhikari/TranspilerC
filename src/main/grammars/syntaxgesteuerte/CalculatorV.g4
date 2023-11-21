@@ -14,9 +14,7 @@ expr: '(' expr ')'                  # parens
     | expr op=(MUL | DIV) expr      # MulDiv
     | expr op=(ADD | SUB) expr      # AddSub
     | expr op=(EQUALS | GREATER | SMALLER) expr   # compare
+    | expr '?' expr ':' expr        # bedingte
     | ID                            # id
     | INT                           # int
     ;
-
-
-    // 7 < 5

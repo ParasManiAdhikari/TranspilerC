@@ -137,6 +137,18 @@ public class CalculatorVBaseListener implements CalculatorVListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBedingte(CalculatorVParser.BedingteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBedingte(CalculatorVParser.BedingteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterId(CalculatorVParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}

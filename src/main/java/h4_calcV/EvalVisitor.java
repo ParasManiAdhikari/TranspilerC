@@ -71,10 +71,20 @@ public class EvalVisitor extends CalculatorVBaseVisitor<Integer>{
         return 0;
     }
 
+    /** expr POWER expr */
     @Override
     public Integer visitPower(CalculatorVParser.PowerContext ctx) {
         int left = visit(ctx.expr(0)); // get value of left subexpression
         int right = visit(ctx.expr(1)); // get value of right subexpression
         return (int) Math.pow(left, right); // return power
+    }
+
+    /** expr '?' expr ':' expr*/
+    @Override
+    public Integer visitBedingte(CalculatorVParser.BedingteContext ctx) {
+        int left = visit(ctx.expr(0));  // get value of left subexpression
+        int mid = visit(ctx.expr(1));   // get value of middle subexpression
+        int right = visit(ctx.expr(2)); // get value of right subexpression
+        return left==1 ? mid : right;
     }
 }

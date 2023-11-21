@@ -19,7 +19,7 @@ public class CalcVisitor {
 
     String expected = "20";
     @ParameterizedTest
-    @ValueSource(strings = {"a = 3\n"})
+    @ValueSource(strings = {"(3 < 2) ? 20 : 30\n"})
     void test(String input) throws IOException {
         CharStream a = CharStreams.fromString(input);
         CalculatorVLexer lexer = new CalculatorVLexer(a);
