@@ -103,6 +103,26 @@
           <option name="language" value="" />
           <option name="generateVisitor" value="true" />
         </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/src/main/grammars/syntaxgesteuerte/Calculator.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\paras\IdeaProjects\fsu-praktikum\src\main\java" />
+          <option name="libDir" value="" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="h4_syntaxgesteuerte" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/src/main/grammars/syntaxgesteuerte/CalculatorV.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\paras\IdeaProjects\fsu-praktikum\src\main\java" />
+          <option name="libDir" value="" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="h4_calcV" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
       </list>
     </option>
   </component>

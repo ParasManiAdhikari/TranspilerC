@@ -14,9 +14,11 @@ expr: indirekt-rekursiv
 
 4.
 Associativität
-alle operatoren links weil es rechts ist nicht erwahnt
+alle operatoren links weil explizit rechts ist nicht erwahnt
 
 Priorität hoch zu niedrig
-alle operatoren gleiche priorität
+'('|')'
+'*'|'/'
+'+'|'-'
 
 */
