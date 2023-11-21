@@ -109,7 +109,7 @@
           <option name="outputDir" value="C:\Users\paras\IdeaProjects\fsu-praktikum\src\main\java" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
-          <option name="pkg" value="h4_syntaxgesteuerte" />
+          <option name="pkg" value="h4_calculator" />
           <option name="language" value="" />
           <option name="generateVisitor" value="true" />
         </PerGrammarGenerationSettings>

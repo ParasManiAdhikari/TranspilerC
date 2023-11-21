@@ -1,8 +1,8 @@
 package h4;
 
 
-import h4_calculator.CalculatorVLexer;
-import h4_calculator.CalculatorVParser;
+import h4_calculator.CalculatorLexer;
+import h4_calculator.CalculatorParser;
 import h4_calculator.EvalVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -22,9 +22,9 @@ public class calcVisitor {
     @ValueSource(strings = {"(3 < 2) ? 20 : 30\n"})
     void test(String input) throws IOException {
         CharStream a = CharStreams.fromString(input);
-        CalculatorVLexer lexer = new CalculatorVLexer(a);
+        CalculatorLexer lexer = new CalculatorLexer(a);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        CalculatorVParser parser = new CalculatorVParser(tokens);
+        CalculatorParser parser = new CalculatorParser(tokens);
         ParseTree tree = parser.prog();
         EvalVisitor eval = new EvalVisitor();
         eval.visit(tree);

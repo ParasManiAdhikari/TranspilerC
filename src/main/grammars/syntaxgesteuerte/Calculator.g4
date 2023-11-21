@@ -1,4 +1,4 @@
-grammar CalculatorV;
+grammar Calculator;
 import CommonRules;
 
 prog: stat+;

@@ -1,4 +1,4 @@
-// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/syntaxgesteuerte/CalculatorV.g4 by ANTLR 4.13.1
+// Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/syntaxgesteuerte/Calculator.g4 by ANTLR 4.13.1
 package h4_calculator;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -6,180 +6,180 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link CalculatorVListener},
+ * This class provides an empty implementation of {@link CalculatorListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
 @SuppressWarnings("CheckReturnValue")
-public class CalculatorVBaseListener implements CalculatorVListener {
+public class CalculatorBaseListener implements CalculatorListener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProg(CalculatorVParser.ProgContext ctx) { }
+	@Override public void enterProg(CalculatorParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProg(CalculatorVParser.ProgContext ctx) { }
+	@Override public void exitProg(CalculatorParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrintExpr(CalculatorVParser.PrintExprContext ctx) { }
+	@Override public void enterPrintExpr(CalculatorParser.PrintExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrintExpr(CalculatorVParser.PrintExprContext ctx) { }
+	@Override public void exitPrintExpr(CalculatorParser.PrintExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssign(CalculatorVParser.AssignContext ctx) { }
+	@Override public void enterAssign(CalculatorParser.AssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssign(CalculatorVParser.AssignContext ctx) { }
+	@Override public void exitAssign(CalculatorParser.AssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClear(CalculatorVParser.ClearContext ctx) { }
+	@Override public void enterClear(CalculatorParser.ClearContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClear(CalculatorVParser.ClearContext ctx) { }
+	@Override public void exitClear(CalculatorParser.ClearContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIfelse(CalculatorVParser.IfelseContext ctx) { }
+	@Override public void enterIfelse(CalculatorParser.IfelseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIfelse(CalculatorVParser.IfelseContext ctx) { }
+	@Override public void exitIfelse(CalculatorParser.IfelseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlank(CalculatorVParser.BlankContext ctx) { }
+	@Override public void enterBlank(CalculatorParser.BlankContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlank(CalculatorVParser.BlankContext ctx) { }
+	@Override public void exitBlank(CalculatorParser.BlankContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParens(CalculatorVParser.ParensContext ctx) { }
+	@Override public void enterParens(CalculatorParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParens(CalculatorVParser.ParensContext ctx) { }
+	@Override public void exitParens(CalculatorParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCompare(CalculatorVParser.CompareContext ctx) { }
+	@Override public void enterCompare(CalculatorParser.CompareContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCompare(CalculatorVParser.CompareContext ctx) { }
+	@Override public void exitCompare(CalculatorParser.CompareContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMulDiv(CalculatorVParser.MulDivContext ctx) { }
+	@Override public void enterMulDiv(CalculatorParser.MulDivContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMulDiv(CalculatorVParser.MulDivContext ctx) { }
+	@Override public void exitMulDiv(CalculatorParser.MulDivContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAddSub(CalculatorVParser.AddSubContext ctx) { }
+	@Override public void enterAddSub(CalculatorParser.AddSubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAddSub(CalculatorVParser.AddSubContext ctx) { }
+	@Override public void exitAddSub(CalculatorParser.AddSubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBedingte(CalculatorVParser.BedingteContext ctx) { }
+	@Override public void enterBedingte(CalculatorParser.BedingteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBedingte(CalculatorVParser.BedingteContext ctx) { }
+	@Override public void exitBedingte(CalculatorParser.BedingteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterId(CalculatorVParser.IdContext ctx) { }
+	@Override public void enterId(CalculatorParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitId(CalculatorVParser.IdContext ctx) { }
+	@Override public void exitId(CalculatorParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPower(CalculatorVParser.PowerContext ctx) { }
+	@Override public void enterPower(CalculatorParser.PowerContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPower(CalculatorVParser.PowerContext ctx) { }
+	@Override public void exitPower(CalculatorParser.PowerContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInt(CalculatorVParser.IntContext ctx) { }
+	@Override public void enterInt(CalculatorParser.IntContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInt(CalculatorVParser.IntContext ctx) { }
+	@Override public void exitInt(CalculatorParser.IntContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
