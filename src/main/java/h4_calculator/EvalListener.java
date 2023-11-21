@@ -29,8 +29,8 @@ public class EvalListener extends CalculatorBaseListener {
 
     @Override
     public void exitMulDiv(CalculatorParser.MulDivContext ctx) {
-        int left = values.get(ctx.expr(0)); // get value of left subexpression
-        int right = values.get(ctx.expr(1)); // get value of right subexpression
+        int left = values.get(ctx.expr(0));
+        int right = values.get(ctx.expr(1));
         if ( ctx.op.getType() == CalculatorParser.MUL ) values.put(ctx, left * right);
         else values.put(ctx, left / right);
     }
@@ -38,8 +38,8 @@ public class EvalListener extends CalculatorBaseListener {
     /** expr op=(EQUALS | GREATER | SMALLER) expr */
     @Override
     public void exitCompare(CalculatorParser.CompareContext ctx){
-        int left = values.get(ctx.expr(0)); // get value of left subexpression
-        int right = values.get(ctx.expr(1)); // get value of right subexpression
+        int left = values.get(ctx.expr(0));
+        int right = values.get(ctx.expr(1));
         if ( ctx.op.getType() == CalculatorParser.EQUALS && left == right ) values.put(ctx, 1);
         else if ( ctx.op.getType() == CalculatorParser.SMALLER && left < right ) values.put(ctx, 1);
         else if (ctx.op.getType() == CalculatorParser.GREATER && left > right) values.put(ctx, 1);
@@ -57,8 +57,8 @@ public class EvalListener extends CalculatorBaseListener {
 
     @Override
     public void exitPower(CalculatorParser.PowerContext ctx) {
-        int left = values.get(ctx.expr(0)); // get value of left subexpression
-        int right = values.get(ctx.expr(1)); // get value of right subexpression
+        int left = values.get(ctx.expr(0));
+        int right = values.get(ctx.expr(1));
         values.put(ctx, (int) Math.pow(left, right));
     }
 }

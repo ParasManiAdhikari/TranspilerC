@@ -16,12 +16,12 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class calcListener {
+public class calcListenerTest {
 
     String expected = "20";
     @ParameterizedTest
     @ValueSource(strings = {"2 ^ 5\n"})
-    void test(String input) throws IOException {
+    void test(String input) {
         CharStream a = CharStreams.fromString(input);
         CalculatorLexer lexer = new CalculatorLexer(a);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
