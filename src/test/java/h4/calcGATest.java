@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class calcGATest {
     @ParameterizedTest
     @CsvFileSource(resources = "/calcGA.csv")
-    void testWithoutParseTree(String input, String expected) {
+    void calcGATest(String input, int expected) {
         CalculatorGAParser parser = new CalculatorGAParser(null);
         parser.setBuildParseTree(false);
         CharStream cs = fromString(input);
         CalculatorGALexer lexer = new CalculatorGALexer(cs);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         parser.setInputStream(tokens);
-        assertEquals(expected, String.valueOf(parser.stat().expr.v));
+        assertEquals(expected, parser.stat().expr.v);
     }
 }

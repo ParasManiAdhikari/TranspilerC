@@ -51,6 +51,21 @@ ExprTest:
   script:
     - mvn -Dtest=h3.ExprTest test
 
+calcGATest:
+  stage: test
+  script:
+    - mvn -Dtest=h4.calcGATest test
+
+calcVisitorTest:
+  stage: test
+  script:
+    - mvn -Dtest=h4.calcVisitorTest test
+
+calcListenerTest:
+  stage: test
+  script:
+    - mvn -Dtest=h4.calcListenerTest test
+
 deploy-prod:
   stage: deploy
   script:

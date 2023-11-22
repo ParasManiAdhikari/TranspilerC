@@ -17,16 +17,15 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class calcVisitorTest {
-
     @ParameterizedTest
     @CsvFileSource(resources = "/calcVisitor.csv")
-    void test(String input, String expected) {
+    void calcVisitorTest(String input, int expected) {
         CharStream a = CharStreams.fromString(input);
         CalculatorLexer lexer = new CalculatorLexer(a);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CalculatorParser parser = new CalculatorParser(tokens);
         ParseTree tree = parser.prog();
         EvalVisitor eval = new EvalVisitor();
-        assertEquals(expected, String.valueOf(eval.visit(tree)));
+        assertEquals(expected, eval.visit(tree));
     }
 }
