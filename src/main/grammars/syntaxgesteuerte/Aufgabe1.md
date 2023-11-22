@@ -38,15 +38,17 @@ int  - int      2
 #### 9-5*2
 
 ```
-       prog (6)
+        prog (-1)
+       / | \
+  expr(9) - expr(10)
      /     \
-  stat (6    n
-  /       \
-expr(10) -   int
-/       \      \
-int  * int      
-|        |
-5        2
+   int      expr(10)
+   |      / | \
+   9    expr * expr
+          /     \
+        int      int
+          |       |
+          5       2
 ```
 
 ### 5. Translation Schema
@@ -62,8 +64,7 @@ expr -> expr / expr { result = expr_1.result / expr_2.result }
 expr -> ( expr ) { result = expr.result }
 ```
 
-f
-annotierte baum????
+
 
 
 
