@@ -23,30 +23,30 @@ Die syntaxgesteuerte Definition ist S- attributiert, da alle Attribute synthetis
 
 #### 9-5+2
 ```
-     prog
-     /  \
-  stat   n
-  /  \
-expr  +
-/  \    \
-int   -   2
-|    |
-9    5
+       prog (6)
+     /     \
+  stat (6    n
+  /       \
+expr(4) +   int
+/       \      \
+int  - int      2
+|        |
+9        5
 
 ```
 
 #### 9-5*2
 
 ```
-       prog
-       /  \
-   stat   n
-   /  \
- expr   *
- /  \    \
-int  -    2
-|    |
-9    5
+       prog (6)
+     /     \
+  stat (6    n
+  /       \
+expr(10) -   int
+/       \      \
+int  * int      
+|        |
+5        2
 ```
 
 ### 5. Translation Schema
@@ -62,7 +62,8 @@ expr -> expr / expr { result = expr_1.result / expr_2.result }
 expr -> ( expr ) { result = expr.result }
 ```
 
-
+f
+annotierte baum????
 
 
 

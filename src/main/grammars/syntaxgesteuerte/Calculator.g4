@@ -9,8 +9,8 @@ stat: expr NL                                     # printExpr
     | NL                                          # blank
     ;
 
-expr: '(' expr ')'                                # parens
-    | <assoc=right> expr POWER expr               # power
+expr: <assoc=right> expr POWER expr               # power
+    | '(' expr ')'                                # parens
     | expr op=(MUL | DIV) expr                    # MulDiv
     | expr op=(ADD | SUB) expr                    # AddSub
     | expr op=(EQUALS | GREATER | SMALLER) expr   # compare

@@ -50,6 +50,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Integer>{
         String id = ctx.ID().getText(); // id is left-hand side of '='
         int value = visit(ctx.expr()); // compute value of expression on right
         memory.put(id, value); // store it in our memory
+        System.out.println(memory.values());
         return value;
     }
 
@@ -86,5 +87,16 @@ public class EvalVisitor extends CalculatorBaseVisitor<Integer>{
         int mid = visit(ctx.expr(1));   // get value of middle subexpression
         int right = visit(ctx.expr(2)); // get value of right subexpression
         return left==1 ? mid : right;
+    }
+
+    /** 'if' '('expr')' stat 'else' stat */
+    @Override
+    public Integer visitIfelse(CalculatorParser.IfelseContext ctx) {
+        return visit(ctx.expr()) == 1 ? visit(ctx.stat(0)) : visit(ctx.stat(1));
+    }
+
+    @Override
+    public Integer visitId(CalculatorParser.IdContext ctx) {
+        return memory.get(ctx.ID().getText());
     }
 }
