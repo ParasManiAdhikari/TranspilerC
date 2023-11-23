@@ -23,46 +23,58 @@ Die syntaxgesteuerte Definition ist S- attributiert, da alle Attribute synthetis
 
 #### 9-5+2
 ```
-       prog (6)
-     /     \
-  stat (6    n
-  /       \
-expr(4) +   int
-/       \      \
-int  - int      2
-|        |
-9        5
+        prog.v=6
+           |
+        stat.v=6
+       /         \
+      stat.v=6       n
+     /        \
+    /          \
+expr.v=4  +  int.v=2
+/        \           \
+int.v=9 - int.v=5      2
+|          |
+9          5
 
 ```
 
 #### 9-5*2
 
 ```
-        prog (-1)
-       / | \
-  expr(9) - expr(10)
-     /     \
-   int      expr(10)
-   |      / | \
-   9    expr * expr
-          /     \
-        int      int
-          |       |
-          5       2
+        prog.v=-1
+         |
+        stat.v=-1
+       /   |   \
+  expr.v=9 - expr.v=10
+     /        \
+  int.v=9     expr.v=10
+   |          /   |   \
+   9    expr.v=5  *  expr.v=2
+           /             \
+          /               \
+        int.v=5      int.v=2
+          |             |
+          5             2
 ```
 
 ### 5. Translation Schema
 ```
-S -> prog { int result}
-prog -> stat { result = stat.result }
-stat -> expr n | n { result = expr.result }
-expr -> INT { result = INT.result }
-expr -> expr + expr { result = expr_1.result + expr_2.result }
-expr -> expr - expr { result = expr_1.result - expr_2.result }
-expr -> expr * expr { result = expr_1.result * expr_2.result }
-expr -> expr / expr { result = expr_1.result / expr_2.result }
-expr -> ( expr ) { result = expr.result }
+prog -> stat            { print(stat.result) }
+stat -> expr n | n      { print(expr.result) }
+expr -> INT             { print(INT.result) }
+expr -> expr + expr     { print('+') }
+expr -> expr - expr     { print('-') }
+expr -> expr * expr     { print('*') }
+expr -> expr / expr     { print('/') }
+expr -> ( expr )        { print(expr.result) }
 ```
+
+### Parse Tree für Übersetzungschema
+#### 9-5*2
+![9-5*2](aufgabe5.jpg)
+
+#### 9-5+2
+![9-5+2](aufgabe5-2.jpg)
 
 
 
