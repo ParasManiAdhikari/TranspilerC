@@ -70,7 +70,7 @@ callGraphTest:
   stage: test
   script:
     - mvn -Dtest=h5.callGraphTest test
-    -
+
 deploy-prod:
   stage: deploy
   script:
