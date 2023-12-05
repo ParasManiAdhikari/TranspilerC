@@ -69,7 +69,7 @@ calcListenerTest:
 callGraphTest:
   stage: test
   script:
-    - mvn -Dtest=h5.callGraphTest test
+    - mvn -Dtest=h5.CallgraphTest test
 
 deploy-prod:
   stage: deploy
