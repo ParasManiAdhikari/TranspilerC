@@ -1,9 +1,9 @@
 digraph G {
-  ranksep=.25; 
+  ranksep=.25;
   edge [arrowsize=.5]
   node [shape=circle, style=filled, fontname="ArialNarrow",
         fontsize=12, fixedsize=true, height=.45];
-  fib[fillcolor=red]; 
+  fib[fillcolor=red];
   fib -> fib [color=red];
   fib -> fib [color=red];
 }

@@ -1,4 +1,4 @@
-package callgraph; /***
+/***
  * Excerpted from "The Definitive ANTLR 4 Reference",
  * published by The Pragmatic Bookshelf.
  * Copyrights apply to this code. It may not be used to create training material,
@@ -6,17 +6,16 @@ package callgraph; /***
  * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/tpantlr2 for more book information.
  ***/
-import callgraph.CymbolLexer;
-import callgraph.CymbolParser;
+package callgraph;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.MultiMap;
 import org.antlr.v4.runtime.misc.OrderedHashSet;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.stringtemplate.v4.ST;
+import script.Tuple;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Set;
 
 public class CallGraph {
@@ -32,12 +31,16 @@ public class CallGraph {
      h -> h;
      }
      */
-    static class Graph {
+    public static class Graph {
         // I'm using org.antlr.v4.runtime.misc: OrderedHashSet, MultiMap
-        Set<String> nodes = new OrderedHashSet<String>(); // list of functions
-        MultiMap<String, String> edges =                  // caller->callee
-                new MultiMap<String, String>();
-        public void edge(String source, String target) {
+        Set<Tuple<String, String>> nodes = new OrderedHashSet<>(); // list of functions
+        MultiMap<String, Tuple<String, String>> edges =                  // caller->callee
+                new MultiMap<>();
+
+        String nodeColor = "[fillcolor=white]"; // Default function declaration color: white
+        String edgeColor = "[color=black]"; // Default function call color: black
+
+        public void edge(String source, Tuple<String, String> target) {
             edges.map(source, target);
         }
         public String toString() {
@@ -48,20 +51,23 @@ public class CallGraph {
             buf.append("digraph G {\n");
             buf.append("  ranksep=.25;\n");
             buf.append("  edge [arrowsize=.5]\n");
-            buf.append("  node [shape=circle, fontname=\"ArialNarrow\",\n");
+            buf.append("  node [shape=circle, style=filled, fontname=\"ArialNarrow\",\n");
             buf.append("        fontsize=12, fixedsize=true, height=.45];\n");
             buf.append("  ");
-            for (String node : nodes) { // print all nodes first
-                buf.append(node);
+            for (Tuple<String, String> node : nodes) { // print all nodes first
+                buf.append(node.fst);
+                buf.append(node.snd);
                 buf.append("; ");
             }
             buf.append("\n");
             for (String src : edges.keySet()) {
-                for (String trg : edges.get(src)) {
+                for (Tuple<String, String> trg : edges.get(src)) {
                     buf.append("  ");
                     buf.append(src);
                     buf.append(" -> ");
-                    buf.append(trg);
+                    buf.append(trg.fst);
+                    buf.append(" ");
+                    buf.append(trg.snd);
                     buf.append(";\n");
                 }
             }
@@ -80,14 +86,14 @@ public class CallGraph {
          */
         public ST toST() {
             ST st = new ST(
-                    "digraph G {\n" +
-                            "  ranksep=.25; \n" +
-                            "  edge [arrowsize=.5]\n" +
-                            "  node [shape=circle, fontname=\"ArialNarrow\",\n" +
-                            "        fontsize=12, fixedsize=true, height=.45];\n" +
-                            "  <funcs:{f | <f>; }>\n" +
-                            "  <edgePairs:{edge| <edge.a> -> <edge.b>;}; separator=\"\\n\">\n" +
-                            "}\n"
+                    "digraph G {\r\n" +
+                            "  ranksep=.25; \r\n" +
+                            "  edge [arrowsize=.5]\r\n" +
+                            "  node [shape=circle, fontname=\"ArialNarrow\",\r\n" +
+                            "        fontsize=12, fixedsize=true, height=.45];\r\n" +
+                            "  <funcs:{f | <f.fst><f.snd>; }>\r\n" +
+                            "  <edgePairs:{edge| <edge.a> -> <edge.b.fst> <edge.b.snd>;}; separator=\"\\n\">\r\n" +
+                            "}\r\n"
             );
             st.add("edgePairs", edges.getPairs());
             st.add("funcs", nodes);
@@ -95,45 +101,76 @@ public class CallGraph {
         }
     }
 
-    static class FunctionListener extends CymbolBaseListener {
-        Graph graph = new Graph();
-        String currentFunctionName = null;
+    public static class FunctionListener extends CymbolBaseListener {
+        public Graph graph = new Graph();
+        public String currentFunctionName = null;
+
+        @Override
+        public void enterReturn(CymbolParser.ReturnContext ctx) {
+            if (ctx.getText().contains(currentFunctionName)) { // select only recursive calls
+                // select only end-recursive calls
+                if (ctx.getText().contains("return"+currentFunctionName) && ctx.getText().contains(");")) {
+                    graph.nodeColor = "[fillcolor=green]";
+                } else {
+                    graph.nodeColor = "[fillcolor=red]";
+                }
+            }
+        }
 
         public void enterFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
             currentFunctionName = ctx.ID().getText();
-            graph.nodes.add(currentFunctionName);
+        }
+        @Override
+        public void exitFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
+            graph.nodes.add(new Tuple<>(currentFunctionName, graph.nodeColor));
+            graph.nodeColor = "[fillcolor=white]";
         }
 
         public void exitCall(CymbolParser.CallContext ctx) {
             String funcName = ctx.ID().getText();
+            if (funcName.equals(currentFunctionName)) { // select only recursive calls
+                if (ctx.getParent().getText().contains("return")) { // select only end-recursive calls
+                    graph.edgeColor = "[color=green]";
+                } else {
+                    graph.edgeColor = "[color=red]";
+                }
+            }
             // map current function to the callee
-            graph.edge(currentFunctionName, funcName);
+            graph.edge(currentFunctionName, new Tuple<>(funcName, graph.edgeColor));
+            graph.edgeColor = "[color=black]";
         }
     }
 
     public static void main(String[] args) throws Exception {
-        String inputFile = null;
-        if ( args.length>0 ) inputFile = args[0];
-        InputStream is = System.in;
-        if ( inputFile!=null ) {
-            is = new FileInputStream(inputFile);
-        }
-        ANTLRInputStream input = new ANTLRInputStream(is);
+        CharStream input = CharStreams.fromString("int fib(int n) {\n" +
+                "  if (n==0) return 0;\n" +
+                "  if (n==1) return 1;\n" +
+                "  return (fib(n-1) + fib(n-2));\n" +
+                "}");
         CymbolLexer lexer = new CymbolLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CymbolParser parser = new CymbolParser(tokens);
         parser.setBuildParseTree(true);
         ParseTree tree = parser.file();
         // show tree in text form
-//        System.out.println(tree.toStringTree(parser));
+        System.out.println(tree.toStringTree(parser));
 
         ParseTreeWalker walker = new ParseTreeWalker();
         FunctionListener collector = new FunctionListener();
-//        walker.walk(collector, tree);
-        System.out.println(collector.graph.toString());
-        System.out.println(collector.graph.toDOT());
+        walker.walk(collector, tree);
+//        System.out.println(collector.graph.toString());
+//        System.out.println(collector.graph.toDOT());
 
         // Here's another example that uses StringTemplate to generate output
-//        System.out.println(collector.graph.toST().render());
+        String inputString = collector.graph.toST().render();
+        System.out.println(inputString);
+        try {
+            File f = new File("graph.gv");
+            FileWriter writer = new FileWriter(f.getName());
+            writer.write(inputString);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,0 +1,70 @@
+int main() {
+   sum(6);
+	sum2(6);
+	binomi(3,6);
+	fib(5);
+	kgV(12,24);
+	ackermann(3,3);
+	mcCarthy(4);
+	return 0;
+}
+
+int identity(int x){
+	return x;
+}
+
+int add(int x, int y) {
+  if (y==0) return identity(x);
+  else return add(x+1, y-1);
+}
+
+int add2(int x, int y) {
+  if (y!=0) return add2(x+1, y-1);
+  else  return identity(x);
+}
+
+int sum(int n){
+   if (n==0) return 0;
+   else return add(sum(n-1),n);
+}
+
+int sum2(int n){
+   if (n==0) return 0;
+   else return add2(sum2(n-1),n);
+}
+
+int binomi(int n, int k) {
+  return fact(n)/(fact(k)*fact(n-k));
+}
+
+int fact(int n){
+   if (n==0) return 1;
+   else      return n*fact(n-1);
+}
+
+int ggT(int m, int n){
+   if (m==n) return m;
+   else if (m > n) return ggT(m-n,n);
+   else return ggT(m,n-m);
+}
+
+int kgV(int a, int b){
+   return a*b / ggT(a, b);
+}
+
+int fib(int n) {
+  if (n==0) return 0;
+  if (n==1) return 1;
+  return (fib(n-1) + fib(n-2));
+}
+
+int mcCarthy(int n){
+   if (n > 100) return n-10;
+   else return mcCarthy(mcCarthy(n+11));
+}
+
+int ackermann(int n, int m) {
+   if (n==0) return m + 1;
+   else if (m==0) return ackermann(n-1,1);
+   else return ackermann(n-1, ackermann(n,m-1));
+}

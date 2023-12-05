@@ -66,6 +66,11 @@ calcListenerTest:
   script:
     - mvn -Dtest=h4.calcListenerTest test
 
+callGraphTest:
+  stage: test
+  script:
+    - mvn -Dtest=h5.callGraphTest test
+    -
 deploy-prod:
   stage: deploy
   script:
