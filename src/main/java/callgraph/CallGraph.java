@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.misc.OrderedHashSet;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.stringtemplate.v4.ST;
+import org.stringtemplate.v4.STGroupFile;
 import script.Tuple;
 
 import java.io.*;
@@ -85,16 +86,7 @@ public class CallGraph {
          Just as an example. Much cleaner than buf.append method
          */
         public ST toST() {
-            ST st = new ST(
-                    "digraph G {\r\n" +
-                            "  ranksep=.25; \r\n" +
-                            "  edge [arrowsize=.5]\r\n" +
-                            "  node [shape=circle, style=filled, fontname=\"ArialNarrow\",\r\n" +
-                            "        fontsize=12, fixedsize=true, height=.45];\r\n" +
-                            "  <funcs:{f | <f.fst><f.snd>; }>\r\n" +
-                            "  <edgePairs:{edge| <edge.a> -> <edge.b.fst> <edge.b.snd>;}; separator=\"\\n\">\r\n" +
-                            "}\r\n"
-            );
+            ST st = new STGroupFile("src/main/resources/stringtemplate/graph.stg").getInstanceOf("digraphTemplate");
             st.add("edgePairs", edges.getPairs());
             st.add("funcs", nodes);
             return st;

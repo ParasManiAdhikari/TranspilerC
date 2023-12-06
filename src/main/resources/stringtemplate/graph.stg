@@ -1,0 +1,12 @@
+group YourTemplate;
+
+digraphTemplate(edgePairs, funcs) ::= <<
+  digraph G {
+    ranksep=.25; 
+    edge [arrowsize=.5]
+    node [shape=circle, style=filled, fontname="ArialNarrow",
+          fontsize=12, fixedsize=true, height=.45];
+    <funcs:{f | <f.fst><f.snd>; }>
+    <edgePairs:{edge | <edge.a> -> <edge.b.fst> <edge.b.snd>; }; separator="\n">
+  }
+>>
