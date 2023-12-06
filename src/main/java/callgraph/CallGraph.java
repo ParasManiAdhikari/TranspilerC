@@ -15,7 +15,6 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
 import script.Tuple;
-
 import java.io.*;
 import java.util.Set;
 
@@ -127,19 +126,18 @@ public class CallGraph {
                     graph.edgeColor = "[color=red]";
                 }
             }
-            // map current function to the callee
             graph.edge(currentFunctionName, new Tuple<>(funcName, graph.edgeColor));
             graph.edgeColor = "[color=black]";
         }
     }
 
     public static void main(String[] args) throws Exception {
-        CharStream input = CharStreams.fromString("int fib(int n) {\n" +
-                "  if (n==0) return 0;\n" +
-                "  if (n==1) return 1;\n" +
-                "  return (fib(n-1) + fib(n-2));\n" +
-                "}");
-//        CharStream input = CharStreams.fromFileName("src/main/resources/rec.cymbol");
+//        CharStream input = CharStreams.fromString("int fib(int n) {\n" +
+//                "  if (n==0) return 0;\n" +
+//                "  if (n==1) return 1;\n" +
+//                "  return (fib(n-1) + fib(n-2));\n" +
+//                "}");
+        CharStream input = CharStreams.fromFileName("src/main/resources/rec.cymbol");
         CymbolLexer lexer = new CymbolLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CymbolParser parser = new CymbolParser(tokens);
