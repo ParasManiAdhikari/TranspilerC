@@ -1,12 +1,16 @@
 group YourTemplate;
 
-digraphTemplate(edgePairs, funcs) ::= <<
+digraphTemplate(Eedges, Nedges, Aedges, endRNodes, NendRNodes, ANodes) ::= <<
   digraph G {
     ranksep=.25; 
     edge [arrowsize=.5]
     node [shape=circle, style=filled, fontname="ArialNarrow",
           fontsize=12, fixedsize=true, height=.45];
-    <funcs:{f | <f.fst><f.snd>; }>
-    <edgePairs:{edge | <edge.a> -> <edge.b.fst> <edge.b.snd>; }; separator="\n">
+    <endRNodes:{f | <f> [fillcolor=green]; }>
+    <NendRNodes:{f | <f> [fillcolor=red]; }>
+    <ANodes:{f | <f> [fillcolor=white]; }>
+    <Eedges:{edge | <edge.a> -> <edge.b> [color=green]; }; separator="\n">
+    <Nedges:{edge | <edge.a> -> <edge.b> [color=red]; }; separator="\n">
+    <Aedges:{edge | <edge.a> -> <edge.b> [color=black]; }; separator="\n">
   }
 >>

@@ -14,8 +14,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
-import script.Tuple;
-import java.io.*;
+
 import java.util.Set;
 
 public class CallGraph {
@@ -32,19 +31,28 @@ public class CallGraph {
      }
      */
     public static class Graph {
-        // I'm using org.antlr.v4.runtime.misc: OrderedHashSet, MultiMap
-        Set<Tuple<String, String>> nodes = new OrderedHashSet<>(); // list of functions
-        MultiMap<String, Tuple<String, String>> edges =                  // caller->callee
-                new MultiMap<>();
+        Boolean isEndRekursiv = false;
+        Boolean entstaendig = false;
+        Set<String> endRNodes = new OrderedHashSet<String>(); // list of functions
+        Set<String> NendRNodes = new OrderedHashSet<String>(); // list of functions
+        Set<String> AndereNodes = new OrderedHashSet<String>(); // list of functions
+        MultiMap<String, String> Eedges = new MultiMap<String, String>();
+        MultiMap<String, String> Nedges = new MultiMap<String, String>();
+        MultiMap<String, String> AndereEdges = new MultiMap<String, String>();
 
-        String nodeColor = "[fillcolor=white]"; // Default function declaration color: white
-        String edgeColor = "[color=black]"; // Default function call color: black
-
-        public void edge(String source, Tuple<String, String> target) {
-            edges.map(source, target);
+        public void Eedge(String source, String target) {
+            Eedges.map(source, target);
         }
+
+        public void Nedge(String source, String target) {
+            Nedges.map(source, target);
+        }
+        public void AndereEdge(String source, String target) {
+            AndereEdges.map(source, target);
+        }
+
         public String toString() {
-            return "edges: "+edges.toString()+", functions: "+ nodes;
+            return "Endständig Edges: "+ Eedges.toString()+ "Endständig Edges: "+ Eedges.toString() +", End Rekursive functions: "+ endRNodes + "\nNicht Endständige Functions: " + NendRNodes;
         }
         public String toDOT() {
             StringBuilder buf = new StringBuilder();
@@ -54,20 +62,31 @@ public class CallGraph {
             buf.append("  node [shape=circle, style=filled, fontname=\"ArialNarrow\",\n");
             buf.append("        fontsize=12, fixedsize=true, height=.45];\n");
             buf.append("  ");
-            for (Tuple<String, String> node : nodes) { // print all nodes first
-                buf.append(node.fst);
-                buf.append(node.snd);
+            for (String node : endRNodes) { // print all nodes first
+                buf.append(node);
+                buf.append("; ");
+            }
+            for (String node : NendRNodes) { // print all nodes first
+                buf.append(node);
                 buf.append("; ");
             }
             buf.append("\n");
-            for (String src : edges.keySet()) {
-                for (Tuple<String, String> trg : edges.get(src)) {
+            for (String src : Eedges.keySet()) {
+                for (String trg : Eedges.get(src)) {
                     buf.append("  ");
                     buf.append(src);
                     buf.append(" -> ");
-                    buf.append(trg.fst);
-                    buf.append(" ");
-                    buf.append(trg.snd);
+                    buf.append(trg);
+                    buf.append(";\n");
+                }
+            }
+            buf.append("\n");
+            for (String src : Nedges.keySet()) {
+                for (String trg : Nedges.get(src)) {
+                    buf.append("  ");
+                    buf.append(src);
+                    buf.append(" -> ");
+                    buf.append(trg);
                     buf.append(";\n");
                 }
             }
@@ -86,8 +105,12 @@ public class CallGraph {
          */
         public ST toST() {
             ST st = new STGroupFile("src/main/resources/stringtemplate/graph.stg").getInstanceOf("digraphTemplate");
-            st.add("edgePairs", edges.getPairs());
-            st.add("funcs", nodes);
+            st.add("Eedges", Eedges.getPairs());
+            st.add("Nedges", Nedges.getPairs());
+            st.add("Aedges", AndereEdges.getPairs());
+            st.add("endRNodes", endRNodes);
+            st.add("NendRNodes", NendRNodes);
+            st.add("ANodes", AndereNodes);
             return st;
         }
     }
@@ -98,12 +121,12 @@ public class CallGraph {
 
         @Override
         public void enterReturn(CymbolParser.ReturnContext ctx) {
-            if (ctx.getText().contains(currentFunctionName)) { // select only recursive calls
-                // select only end-recursive calls
-                if (ctx.getText().contains("return"+currentFunctionName) && ctx.getText().contains(");")) {
-                    graph.nodeColor = "[fillcolor=green]";
+            String returnCTX = ctx.getText();
+            if (returnCTX.contains(currentFunctionName)) {
+                if (returnCTX.contains("return"+currentFunctionName) && ctx.getText().contains(");")) {
+                    graph.isEndRekursiv = true;
                 } else {
-                    graph.nodeColor = "[fillcolor=red]";
+                    graph.isEndRekursiv = false;
                 }
             }
         }
@@ -113,21 +136,27 @@ public class CallGraph {
         }
         @Override
         public void exitFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
-            graph.nodes.add(new Tuple<>(currentFunctionName, graph.nodeColor));
-            graph.nodeColor = "[fillcolor=white]";
+            if(graph.isEndRekursiv){
+                graph.endRNodes.add(currentFunctionName);
+            } else if(!graph.isEndRekursiv){
+                graph.NendRNodes.add(currentFunctionName);
+            } else graph.AndereNodes.add(currentFunctionName);
         }
 
         public void exitCall(CymbolParser.CallContext ctx) {
             String funcName = ctx.ID().getText();
             if (funcName.equals(currentFunctionName)) { // select only recursive calls
                 if (ctx.getParent().getText().contains("return")) { // select only end-recursive calls
-                    graph.edgeColor = "[color=green]";
+                    graph.entstaendig = true;
                 } else {
-                    graph.edgeColor = "[color=red]";
+                    graph.entstaendig = false;
                 }
             }
-            graph.edge(currentFunctionName, new Tuple<>(funcName, graph.edgeColor));
-            graph.edgeColor = "[color=black]";
+            if(graph.entstaendig){
+                graph.Eedge(currentFunctionName, funcName);
+            } else if (!graph.entstaendig) {
+                graph.Nedge(currentFunctionName, funcName);
+            } else graph.AndereEdge(currentFunctionName, funcName);
         }
     }
 
@@ -155,16 +184,16 @@ public class CallGraph {
         // Here's another example that uses StringTemplate to generate output
         String inputString = collector.graph.toST().render();
         System.out.println(inputString);
-        try {
-            String inputFilePath = "graph.gv";
-            File f = new File(inputFilePath);
-            FileWriter writer = new FileWriter(f.getName());
-            writer.write(inputString);
-            writer.close();
-            createPNG(inputFilePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String inputFilePath = "graph.gv";
+//            File f = new File(inputFilePath);
+//            FileWriter writer = new FileWriter(f.getName());
+//            writer.write(inputString);
+//            writer.close();
+//            createPNG(inputFilePath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private static void createPNG(String inputFilePath) throws Exception {
