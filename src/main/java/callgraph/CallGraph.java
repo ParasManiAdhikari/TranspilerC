@@ -89,7 +89,7 @@ public class CallGraph {
                     "digraph G {\r\n" +
                             "  ranksep=.25; \r\n" +
                             "  edge [arrowsize=.5]\r\n" +
-                            "  node [shape=circle, fontname=\"ArialNarrow\",\r\n" +
+                            "  node [shape=circle, style=filled, fontname=\"ArialNarrow\",\r\n" +
                             "        fontsize=12, fixedsize=true, height=.45];\r\n" +
                             "  <funcs:{f | <f.fst><f.snd>; }>\r\n" +
                             "  <edgePairs:{edge| <edge.a> -> <edge.b.fst> <edge.b.snd>;}; separator=\"\\n\">\r\n" +
@@ -147,6 +147,7 @@ public class CallGraph {
                 "  if (n==1) return 1;\n" +
                 "  return (fib(n-1) + fib(n-2));\n" +
                 "}");
+//        CharStream input = CharStreams.fromFileName("src/main/resources/rec.cymbol");
         CymbolLexer lexer = new CymbolLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CymbolParser parser = new CymbolParser(tokens);
@@ -165,12 +166,27 @@ public class CallGraph {
         String inputString = collector.graph.toST().render();
         System.out.println(inputString);
         try {
-            File f = new File("graph.gv");
+            String inputFilePath = "graph.gv";
+            File f = new File(inputFilePath);
             FileWriter writer = new FileWriter(f.getName());
             writer.write(inputString);
             writer.close();
+            createPNG(inputFilePath);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void createPNG(String inputFilePath) throws Exception {
+        String outputFilePath = "output.png";
+        ProcessBuilder processBuilder = new ProcessBuilder("dot", "-Tpng", inputFilePath, "-o", outputFilePath);
+        processBuilder.redirectErrorStream(true);
+        Process process = processBuilder.start();
+        int exitCode = process.waitFor();
+        if (exitCode == 0) {
+            System.out.println("PNG file generated successfully.");
+        } else {
+            System.err.println("Error generating PNG file. Exit code: " + exitCode);
         }
     }
 }
