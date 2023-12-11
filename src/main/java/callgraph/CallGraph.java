@@ -15,6 +15,9 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Set;
 
 public class CallGraph {
@@ -32,10 +35,14 @@ public class CallGraph {
      */
     public static class Graph {
         Boolean isEndRekursiv = false;
-        Boolean entstaendig = false;
-        Set<String> endRNodes = new OrderedHashSet<String>(); // list of functions
-        Set<String> NendRNodes = new OrderedHashSet<String>(); // list of functions
-        Set<String> AndereNodes = new OrderedHashSet<String>(); // list of functions
+        Boolean isNichtEntstandig = false;
+        Boolean andereNode = false;
+        Boolean entstaendigEdge = false;
+        Boolean isNichtentstadigEdge = false;
+        Boolean andereEdge = false;
+        Set<String> endRNodes = new OrderedHashSet<String>(); // list of endstanding nodes
+        Set<String> NendRNodes = new OrderedHashSet<String>(); // list of nicht entstandig nodes
+        Set<String> AndereNodes = new OrderedHashSet<String>(); // list of andere nodes
         MultiMap<String, String> Eedges = new MultiMap<String, String>();
         MultiMap<String, String> Nedges = new MultiMap<String, String>();
         MultiMap<String, String> AndereEdges = new MultiMap<String, String>();
@@ -52,7 +59,12 @@ public class CallGraph {
         }
 
         public String toString() {
-            return "Endständig Edges: "+ Eedges.toString()+ "Endständig Edges: "+ Eedges.toString() +", End Rekursive functions: "+ endRNodes + "\nNicht Endständige Functions: " + NendRNodes;
+            return "Endständig Edges: "+ Eedges.toString()+
+                    "Nicht Entstanding: "+ Nedges.toString() +
+                    "Andere Edges: " + AndereEdges.toString() +
+                    ", End Rekursive functions: "+ endRNodes +
+                    "\nNicht Endständige Functions: " + NendRNodes +
+                    "Andere Nodes: " +  AndereNodes;
         }
         public String toDOT() {
             StringBuilder buf = new StringBuilder();
@@ -125,9 +137,18 @@ public class CallGraph {
             if (returnCTX.contains(currentFunctionName)) {
                 if (returnCTX.contains("return"+currentFunctionName) && ctx.getText().contains(");")) {
                     graph.isEndRekursiv = true;
+                    graph.isNichtentstadigEdge = false;
+                    graph.andereNode = false;
                 } else {
+                    graph.isNichtEntstandig = true;
                     graph.isEndRekursiv = false;
+                    graph.andereNode = false;
                 }
+            }
+            else{
+                graph.isNichtEntstandig = false;
+                graph.isEndRekursiv = false;
+                graph.andereNode = true;
             }
         }
 
@@ -136,9 +157,10 @@ public class CallGraph {
         }
         @Override
         public void exitFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
+            String funcName = ctx.ID().getText();
             if(graph.isEndRekursiv){
                 graph.endRNodes.add(currentFunctionName);
-            } else if(!graph.isEndRekursiv){
+            } else if(graph.isNichtEntstandig){
                 graph.NendRNodes.add(currentFunctionName);
             } else graph.AndereNodes.add(currentFunctionName);
         }
@@ -147,14 +169,16 @@ public class CallGraph {
             String funcName = ctx.ID().getText();
             if (funcName.equals(currentFunctionName)) { // select only recursive calls
                 if (ctx.getParent().getText().contains("return")) { // select only end-recursive calls
-                    graph.entstaendig = true;
+                    graph.entstaendigEdge = true;
+                    graph.isNichtentstadigEdge = false;
                 } else {
-                    graph.entstaendig = false;
+                    graph.isNichtentstadigEdge = true;
+                    graph.entstaendigEdge = false;
                 }
             }
-            if(graph.entstaendig){
+            if(graph.entstaendigEdge){
                 graph.Eedge(currentFunctionName, funcName);
-            } else if (!graph.entstaendig) {
+            } else if (graph.isNichtentstadigEdge) {
                 graph.Nedge(currentFunctionName, funcName);
             } else graph.AndereEdge(currentFunctionName, funcName);
         }
@@ -184,20 +208,20 @@ public class CallGraph {
         // Here's another example that uses StringTemplate to generate output
         String inputString = collector.graph.toST().render();
         System.out.println(inputString);
-//        try {
-//            String inputFilePath = "graph.gv";
-//            File f = new File(inputFilePath);
-//            FileWriter writer = new FileWriter(f.getName());
-//            writer.write(inputString);
-//            writer.close();
-//            createPNG(inputFilePath);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            String inputFilePath = "photo.gv";
+            File f = new File(inputFilePath);
+            FileWriter writer = new FileWriter(f.getName());
+            writer.write(inputString);
+            writer.close();
+            createPNG(inputFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void createPNG(String inputFilePath) throws Exception {
-        String outputFilePath = "output.png";
+        String outputFilePath = "photo.png";
         ProcessBuilder processBuilder = new ProcessBuilder("dot", "-Tpng", inputFilePath, "-o", outputFilePath);
         processBuilder.redirectErrorStream(true);
         Process process = processBuilder.start();

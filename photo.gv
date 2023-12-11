@@ -1,0 +1,28 @@
+  digraph G {
+    ranksep=.25; 
+    edge [arrowsize=.5]
+    node [shape=circle, style=filled, fontname="ArialNarrow",
+          fontsize=12, fixedsize=true, height=.45];
+    add [fillcolor=green]; 
+    sum [fillcolor=red]; sum2 [fillcolor=red]; fact [fillcolor=red]; 
+    main [fillcolor=white]; identity [fillcolor=white]; add2 [fillcolor=white]; binomi [fillcolor=white]; 
+    add -> add [color=green]; 
+    add2 -> add2 [color=green]; 
+    add2 -> identity [color=green]; 
+    sum -> sum [color=red]; 
+    sum -> add [color=red]; 
+    sum2 -> sum2 [color=red]; 
+    sum2 -> add2 [color=red]; 
+    binomi -> fact [color=red]; 
+    binomi -> fact [color=red]; 
+    binomi -> fact [color=red]; 
+    fact -> fact [color=red]; 
+    main -> sum [color=black]; 
+    main -> sum2 [color=black]; 
+    main -> binomi [color=black]; 
+    main -> fib [color=black]; 
+    main -> kgV [color=black]; 
+    main -> ackermann [color=black]; 
+    main -> mcCarthy [color=black]; 
+    add -> identity [color=black]; 
+  }
