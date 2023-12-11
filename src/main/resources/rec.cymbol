@@ -2,6 +2,11 @@ int identity(int x){
 	return x;
 }
 
+int add(int x, int y) {
+  if (y==0) return identity(x);
+  else return add(x+1, y-1);
+}
+
 int add2(int x, int y) {
   if (y!=0) return add2(x+1, y-1);
   else  return identity(x);

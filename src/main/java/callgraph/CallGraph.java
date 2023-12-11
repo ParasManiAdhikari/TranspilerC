@@ -145,7 +145,7 @@ public class CallGraph {
                     graph.andereNode = false;
                 }
             }
-            else{
+            else if(!graph.isEndRekursiv){
                 graph.isNichtEntstandig = false;
                 graph.isEndRekursiv = false;
                 graph.andereNode = true;
@@ -157,17 +157,23 @@ public class CallGraph {
         }
         @Override
         public void exitFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
-            String funcName = ctx.ID().getText();
             if(graph.isEndRekursiv){
                 graph.endRNodes.add(currentFunctionName);
             } else if(graph.isNichtEntstandig){
                 graph.NendRNodes.add(currentFunctionName);
             } else graph.AndereNodes.add(currentFunctionName);
+            resetNodes();
+        }
+
+        private void resetNodes() {
+            graph.isEndRekursiv = false;
+            graph.isNichtEntstandig = false;
+            graph.andereNode = false;
         }
 
         public void exitCall(CymbolParser.CallContext ctx) {
-            String funcName = ctx.ID().getText();
-            if (funcName.equals(currentFunctionName)) { // select only recursive calls
+            String calledFunction = ctx.ID().getText();
+            if (calledFunction.equals(currentFunctionName)) { // select only recursive calls
                 if (ctx.getParent().getText().contains("return")) { // select only end-recursive calls
                     graph.entstaendigEdge = true;
                     graph.isNichtentstadigEdge = false;
@@ -177,10 +183,10 @@ public class CallGraph {
                 }
             }
             if(graph.entstaendigEdge){
-                graph.Eedge(currentFunctionName, funcName);
+                graph.Eedge(currentFunctionName, calledFunction);
             } else if (graph.isNichtentstadigEdge) {
-                graph.Nedge(currentFunctionName, funcName);
-            } else graph.AndereEdge(currentFunctionName, funcName);
+                graph.Nedge(currentFunctionName, calledFunction);
+            } else graph.AndereEdge(currentFunctionName, calledFunction);
         }
     }
 
