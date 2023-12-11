@@ -154,7 +154,10 @@ public class CallGraph {
 
         public void enterFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
             currentFunctionName = ctx.ID().getText();
+            resetNodes();
+            resetEdges();
         }
+
         @Override
         public void exitFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
             if(graph.isEndRekursiv){
@@ -162,13 +165,17 @@ public class CallGraph {
             } else if(graph.isNichtEntstandig){
                 graph.NendRNodes.add(currentFunctionName);
             } else graph.AndereNodes.add(currentFunctionName);
-            resetNodes();
         }
 
         private void resetNodes() {
             graph.isEndRekursiv = false;
             graph.isNichtEntstandig = false;
             graph.andereNode = false;
+        }
+
+        private void resetEdges() {
+            graph.entstaendigEdge = false;
+            graph.isNichtentstadigEdge = false;
         }
 
         public void exitCall(CymbolParser.CallContext ctx) {
@@ -181,6 +188,10 @@ public class CallGraph {
                     graph.isNichtentstadigEdge = true;
                     graph.entstaendigEdge = false;
                 }
+            }
+            else if(ctx.getParent().getText().contains("return"+calledFunction) && ctx.getParent().getText().contains(");")){
+                graph.entstaendigEdge = true;
+                graph.isNichtentstadigEdge = false;
             }
             if(graph.entstaendigEdge){
                 graph.Eedge(currentFunctionName, calledFunction);
