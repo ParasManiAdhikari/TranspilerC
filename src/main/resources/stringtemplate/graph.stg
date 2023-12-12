@@ -9,8 +9,8 @@ digraphTemplate(Eedges, Nedges, Aedges, endRNodes, NendRNodes, ANodes) ::= <<
     <endRNodes:{f | <f> [fillcolor=green]; }>
     <NendRNodes:{f | <f> [fillcolor=red]; }>
     <ANodes:{f | <f> [fillcolor=white]; }>
-    <Eedges:{edge | <edge.a> -> <edge.b> [color=green]; }; separator="\n">
-    <Nedges:{edge | <edge.a> -> <edge.b> [color=red]; }; separator="\n">
-    <Aedges:{edge | <edge.a> -> <edge.b> [color=black]; }; separator="\n">
+    <Eedges:{edge | <edge.a> -> <edge.b> [color=green]; }; separator="\r\n">
+    <Nedges:{edge | <edge.a> -> <edge.b> [color=red]; }; separator="\r\n">
+    <Aedges:{edge | <edge.a> -> <edge.b> [color=black]; }; separator="\r\n">
   }
 >>
