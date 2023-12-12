@@ -135,14 +135,13 @@ public class CallGraph {
         public void enterReturn(CymbolParser.ReturnContext ctx) {
             String returnCTX = ctx.getText();
             if (returnCTX.contains(currentFunctionName)) {
+                graph.andereNode = false;
                 if (returnCTX.contains("return"+currentFunctionName) && ctx.getText().contains(");")) {
                     graph.isEndRekursiv = true;
                     graph.isNichtentstadigEdge = false;
-                    graph.andereNode = false;
                 } else {
                     graph.isNichtEntstandig = true;
                     graph.isEndRekursiv = false;
-                    graph.andereNode = false;
                 }
             }
             else if(!graph.isEndRekursiv){

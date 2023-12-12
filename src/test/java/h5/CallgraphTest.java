@@ -18,42 +18,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CallgraphTest {
 
-    String expected = "digraph G {\n" +
-            "  ranksep=.25;\n" +
-            "  edge [arrowsize=.5]\n" +
-            "  node [shape=circle, style=filled, fontname=\"ArialNarrow\",\n" +
-            "        fontsize=12, fixedsize=true, height=.45];\n" +
-            "  main[fillcolor=white]; identity[fillcolor=white]; add[fillcolor=green]; add2[fillcolor=green]; sum[fillcolor=red]; sum2[fillcolor=red]; binomi[fillcolor=white]; fact[fillcolor=red]; ggT[fillcolor=green]; kgV[fillcolor=white]; fib[fillcolor=red]; mcCarthy[fillcolor=green]; ackermann[fillcolor=green]; \n" +
-            "  main -> sum [color=black];\n" +
-            "  main -> sum2 [color=black];\n" +
-            "  main -> binomi [color=black];\n" +
-            "  main -> fib [color=black];\n" +
-            "  main -> kgV [color=black];\n" +
-            "  main -> ackermann [color=black];\n" +
-            "  main -> mcCarthy [color=black];\n" +
-            "  add -> identity [color=black];\n" +
-            "  add -> add [color=green];\n" +
-            "  add2 -> add2 [color=green];\n" +
-            "  add2 -> identity [color=black];\n" +
-            "  sum -> sum [color=red];\n" +
-            "  sum -> add [color=black];\n" +
-            "  sum2 -> sum2 [color=red];\n" +
-            "  sum2 -> add2 [color=black];\n" +
-            "  binomi -> fact [color=black];\n" +
-            "  binomi -> fact [color=black];\n" +
-            "  binomi -> fact [color=black];\n" +
-            "  fact -> fact [color=red];\n" +
-            "  ggT -> ggT [color=green];\n" +
-            "  ggT -> ggT [color=green];\n" +
-            "  kgV -> ggT [color=black];\n" +
-            "  fib -> fib [color=red];\n" +
-            "  fib -> fib [color=red];\n" +
-            "  mcCarthy -> mcCarthy [color=red];\n" +
-            "  mcCarthy -> mcCarthy [color=green];\n" +
-            "  ackermann -> ackermann [color=green];\n" +
-            "  ackermann -> ackermann [color=red];\n" +
-            "  ackermann -> ackermann [color=green];\n" +
-            "}\n";
+    String expected = "  digraph G {\r\n" +
+            "    ranksep=.25; \r\n" +
+            "    edge [arrowsize=.5]\r\n" +
+            "    node [shape=circle, style=filled, fontname=\"ArialNarrow\",\r\n" +
+            "          fontsize=12, fixedsize=true, height=.45];\r\n" +
+            "    add [fillcolor=green]; add2 [fillcolor=green]; ggT [fillcolor=green]; mcCarthy [fillcolor=green]; ackermann [fillcolor=green]; \r\n" +
+            "    sum [fillcolor=red]; sum2 [fillcolor=red]; fact [fillcolor=red]; fib [fillcolor=red]; \r\n" +
+            "    main [fillcolor=white]; identity [fillcolor=white]; binomi [fillcolor=white]; kgV [fillcolor=white]; \r\n" +
+            "    add -> identity [color=green]; \r\n" +
+            "    add -> add [color=green]; \r\n" +
+            "    add2 -> add2 [color=green]; \r\n" +
+            "    add2 -> identity [color=green]; \r\n" +
+            "    sum -> add [color=green]; \r\n" +
+            "    sum2 -> add2 [color=green]; \r\n" +
+            "    ggT -> ggT [color=green]; \r\n" +
+            "    ggT -> ggT [color=green]; \r\n" +
+            "    mcCarthy -> mcCarthy [color=green]; \r\n" +
+            "    ackermann -> ackermann [color=green]; \r\n" +
+            "    ackermann -> ackermann [color=green]; \r\n" +
+            "    sum -> sum [color=red]; \r\n" +
+            "    sum2 -> sum2 [color=red]; \r\n" +
+            "    fact -> fact [color=red]; \r\n" +
+            "    fib -> fib [color=red]; \r\n" +
+            "    fib -> fib [color=red]; \r\n" +
+            "    mcCarthy -> mcCarthy [color=red]; \r\n" +
+            "    ackermann -> ackermann [color=red]; \r\n" +
+            "    main -> sum [color=black]; \r\n" +
+            "    main -> sum2 [color=black]; \r\n" +
+            "    main -> binomi [color=black]; \r\n" +
+            "    main -> fib [color=black]; \r\n" +
+            "    main -> kgV [color=black]; \r\n" +
+            "    main -> ackermann [color=black]; \r\n" +
+            "    main -> mcCarthy [color=black]; \r\n" +
+            "    binomi -> fact [color=black]; \r\n" +
+            "    binomi -> fact [color=black]; \r\n" +
+            "    binomi -> fact [color=black]; \r\n" +
+            "    kgV -> ggT [color=black]; \r\n" +
+            "  }";
+
     @Test
     void callGraphTest() throws IOException {
         CharStream input = CharStreams.fromFileName("src/main/resources/rec.cymbol");
@@ -67,11 +70,11 @@ public class CallgraphTest {
         ParseTreeWalker walker = new ParseTreeWalker();
         FunctionListener collector = new FunctionListener();
         walker.walk(collector, tree);
-        String inputString = collector.graph.toDOT();
+//        String actual = collector.graph.toDOT();
 
         // String Template
-//        String inputString = collector.graph.toST().render();
+        String actual = collector.graph.toST().render();
 
-        assertEquals(inputString, expected);
+        assertEquals(expected, actual);
     }
 }
