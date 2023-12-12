@@ -18,43 +18,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CallgraphTest {
 
-    String expected = "  digraph G {\r\n" +
-            "    ranksep=.25; \r\n" +
-            "    edge [arrowsize=.5]\r\n" +
-            "    node [shape=circle, style=filled, fontname=\"ArialNarrow\",\r\n" +
-            "          fontsize=12, fixedsize=true, height=.45];\r\n" +
-            "    add [fillcolor=green]; add2 [fillcolor=green]; ggT [fillcolor=green]; mcCarthy [fillcolor=green]; ackermann [fillcolor=green]; \r\n" +
-            "    sum [fillcolor=red]; sum2 [fillcolor=red]; fact [fillcolor=red]; fib [fillcolor=red]; \r\n" +
-            "    main [fillcolor=white]; identity [fillcolor=white]; binomi [fillcolor=white]; kgV [fillcolor=white]; \r\n" +
-            "    add -> identity [color=green]; \r\n" +
-            "    add -> add [color=green]; \r\n" +
-            "    add2 -> add2 [color=green]; \r\n" +
-            "    add2 -> identity [color=green]; \r\n" +
-            "    sum -> add [color=green]; \r\n" +
-            "    sum2 -> add2 [color=green]; \r\n" +
-            "    ggT -> ggT [color=green]; \r\n" +
-            "    ggT -> ggT [color=green]; \r\n" +
-            "    mcCarthy -> mcCarthy [color=green]; \r\n" +
-            "    ackermann -> ackermann [color=green]; \r\n" +
-            "    ackermann -> ackermann [color=green]; \r\n" +
-            "    sum -> sum [color=red]; \r\n" +
-            "    sum2 -> sum2 [color=red]; \r\n" +
-            "    fact -> fact [color=red]; \r\n" +
-            "    fib -> fib [color=red]; \r\n" +
-            "    fib -> fib [color=red]; \r\n" +
-            "    mcCarthy -> mcCarthy [color=red]; \r\n" +
-            "    ackermann -> ackermann [color=red]; \r\n" +
-            "    main -> sum [color=black]; \r\n" +
-            "    main -> sum2 [color=black]; \r\n" +
-            "    main -> binomi [color=black]; \r\n" +
-            "    main -> fib [color=black]; \r\n" +
-            "    main -> kgV [color=black]; \r\n" +
-            "    main -> ackermann [color=black]; \r\n" +
-            "    main -> mcCarthy [color=black]; \r\n" +
-            "    binomi -> fact [color=black]; \r\n" +
-            "    binomi -> fact [color=black]; \r\n" +
-            "    binomi -> fact [color=black]; \r\n" +
-            "    kgV -> ggT [color=black]; \r\n" +
+    String expected = "  digraph G {\n" +
+            "    ranksep=.25; \n" +
+            "    edge [arrowsize=.5]\n" +
+            "    node [shape=circle, style=filled, fontname=\"ArialNarrow\",\n" +
+            "          fontsize=12, fixedsize=true, height=.45];\n" +
+            "    add [fillcolor=green]; add2 [fillcolor=green]; ggT [fillcolor=green]; mcCarthy [fillcolor=green]; ackermann [fillcolor=green]; \n" +
+            "    sum [fillcolor=red]; sum2 [fillcolor=red]; fact [fillcolor=red]; fib [fillcolor=red]; \n" +
+            "    main [fillcolor=white]; identity [fillcolor=white]; binomi [fillcolor=white]; kgV [fillcolor=white]; \n" +
+            "    add -> identity [color=green]; \n" +
+            "    add -> add [color=green]; \n" +
+            "    add2 -> add2 [color=green]; \n" +
+            "    add2 -> identity [color=green]; \n" +
+            "    sum -> add [color=green]; \n" +
+            "    sum2 -> add2 [color=green]; \n" +
+            "    ggT -> ggT [color=green]; \n" +
+            "    ggT -> ggT [color=green]; \n" +
+            "    mcCarthy -> mcCarthy [color=green]; \n" +
+            "    ackermann -> ackermann [color=green]; \n" +
+            "    ackermann -> ackermann [color=green]; \n" +
+            "    sum -> sum [color=red]; \n" +
+            "    sum2 -> sum2 [color=red]; \n" +
+            "    fact -> fact [color=red]; \n" +
+            "    fib -> fib [color=red]; \n" +
+            "    fib -> fib [color=red]; \n" +
+            "    mcCarthy -> mcCarthy [color=red]; \n" +
+            "    ackermann -> ackermann [color=red]; \n" +
+            "    main -> sum [color=black]; \n" +
+            "    main -> sum2 [color=black]; \n" +
+            "    main -> binomi [color=black]; \n" +
+            "    main -> fib [color=black]; \n" +
+            "    main -> kgV [color=black]; \n" +
+            "    main -> ackermann [color=black]; \n" +
+            "    main -> mcCarthy [color=black]; \n" +
+            "    binomi -> fact [color=black]; \n" +
+            "    binomi -> fact [color=black]; \n" +
+            "    binomi -> fact [color=black]; \n" +
+            "    kgV -> ggT [color=black]; \n" +
             "  }";
 
     @Test
