@@ -1,5 +1,5 @@
 // Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/zwischencodegen/Cymbol.g4 by ANTLR 4.13.1
-package zwischencode;
+package zwischencodeGENERATED;
 
 
 import org.antlr.v4.runtime.Lexer;

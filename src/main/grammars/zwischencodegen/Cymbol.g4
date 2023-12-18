@@ -50,18 +50,18 @@ varDecl:   type ID ';' ;
 
 type:   'float' | 'int'  ;
 
-expr:   op = '-' expr
-    |   expr op=('*'|'/') expr
-    |   expr op=('+'|'-') expr
-    |   ID
-    |   INT
-    |   '(' expr ')'
-    |   ID '(' args ')'
+expr:   op = '-' expr           # NegateVar
+    |   expr op=('*'|'/') expr  # MulDiv
+    |   expr op=('+'|'-') expr  # AddSub
+    |   ID                      # Var
+    |   INT                     # Int
+    |   '(' expr ')'            # BracketExpr
+    |   ID '(' args ')'         # Call
     ;
 
-bexpr:   '!' bexpr
-    |   expr op=('=='|'!='|'<'|'>') expr
-    |   'true'
-    |   'false'
-    |   '(' bexpr ')'
+bexpr:   '!' bexpr                          # IsNot
+    |   expr op=('=='|'!='|'<'|'>') expr    # Comparison
+    |   'true'                              # IsTrue
+    |   'false'                             # IsFalse
+    |   '(' bexpr ')'                       # BracketBexpr
     ;

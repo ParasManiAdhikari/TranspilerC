@@ -1,5 +1,5 @@
 // Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/zwischencodegen/Cymbol.g4 by ANTLR 4.13.1
-package zwischencode;
+package zwischencodeGENERATED;
 
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -109,15 +109,87 @@ public interface CymbolVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitType(CymbolParser.TypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CymbolParser#expr}.
+	 * Visit a parse tree produced by the {@code Call}
+	 * labeled alternative in {@link CymbolParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr(CymbolParser.ExprContext ctx);
+	T visitCall(CymbolParser.CallContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CymbolParser#bexpr}.
+	 * Visit a parse tree produced by the {@code MulDiv}
+	 * labeled alternative in {@link CymbolParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBexpr(CymbolParser.BexprContext ctx);
+	T visitMulDiv(CymbolParser.MulDivContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AddSub}
+	 * labeled alternative in {@link CymbolParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAddSub(CymbolParser.AddSubContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Var}
+	 * labeled alternative in {@link CymbolParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar(CymbolParser.VarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BracketExpr}
+	 * labeled alternative in {@link CymbolParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBracketExpr(CymbolParser.BracketExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Int}
+	 * labeled alternative in {@link CymbolParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInt(CymbolParser.IntContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NegateVar}
+	 * labeled alternative in {@link CymbolParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegateVar(CymbolParser.NegateVarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IsNot}
+	 * labeled alternative in {@link CymbolParser#bexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIsNot(CymbolParser.IsNotContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Comparison}
+	 * labeled alternative in {@link CymbolParser#bexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComparison(CymbolParser.ComparisonContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IsTrue}
+	 * labeled alternative in {@link CymbolParser#bexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIsTrue(CymbolParser.IsTrueContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IsFalse}
+	 * labeled alternative in {@link CymbolParser#bexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIsFalse(CymbolParser.IsFalseContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BracketBexpr}
+	 * labeled alternative in {@link CymbolParser#bexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBracketBexpr(CymbolParser.BracketBexprContext ctx);
 }
