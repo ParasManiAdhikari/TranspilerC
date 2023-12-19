@@ -10,11 +10,15 @@ package zwischencode;
  ***/
 public class Symbol { // A generic programming language symbol
     String name;      // All symbols at least have a name
+    Scope scope;
     Type type;
+    int index = 0;
     public enum Type {tINVALID, tVOID, tINT, tFLOAT}
     public Symbol(String name) { this.name = name; }
-    public Symbol(String name, Type type) {this(name); this.type = type;}
+    public Symbol(String name, Type type, int index) {this(name); this.type = type; this.index = index;}
     public String getName() { return name; }
+
+    public int nextVarIndex() { return index++; }
     public String toString() {
         if ( type!=null ) return '<'+getName()+":"+type+'>';
         return getName();

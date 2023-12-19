@@ -8,17 +8,9 @@ package zwischencode;
  * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
-public interface Scope {
-    public String getScopeName();
-
-    /** Scope in which this scope defined. For global scope, it's null */
-    public Scope getEnclosingScope();
-
-    /** Define a symbol in the current scope */
-    public void define(Symbol sym);
-
-    /** Look up name in this scope or in parent scope if not here */
-    public Symbol resolve(String name);
-
-    int nextVarIndex();
+/** Represents a variable definition (name,type) in symbol table */
+public class VariableSymbol extends Symbol {
+    public VariableSymbol(String name, Type type, int index) {
+        super(name, type, index);
+    }
 }

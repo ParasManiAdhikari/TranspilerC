@@ -100,6 +100,16 @@ public interface CymbolListener extends ParseTreeListener {
 	 */
 	void exitIfStat(CymbolParser.IfStatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CymbolParser#elseStat}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseStat(CymbolParser.ElseStatContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CymbolParser#elseStat}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseStat(CymbolParser.ElseStatContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CymbolParser#forStat}.
 	 * @param ctx the parse tree
 	 */

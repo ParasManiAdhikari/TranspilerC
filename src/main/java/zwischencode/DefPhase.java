@@ -21,7 +21,7 @@ public class DefPhase extends CymbolBaseListener {
     }
 
     public void exitFile(CymbolParser.FileContext ctx) {
-        System.out.println(globals);
+//        System.out.println(globals);
     }
 
     public void enterFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
@@ -39,7 +39,7 @@ public class DefPhase extends CymbolBaseListener {
     void saveScope(ParserRuleContext ctx, Scope s) { scopes.put(ctx, s); }
 
     public void exitFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
-        System.out.println(currentScope);
+//        System.out.println(currentScope);
         currentScope = currentScope.getEnclosingScope(); // pop scope
     }
 
@@ -50,7 +50,7 @@ public class DefPhase extends CymbolBaseListener {
     }
 
     public void exitBlock(CymbolParser.BlockContext ctx) {
-        System.out.println(currentScope);
+//        System.out.println(currentScope);
         currentScope = currentScope.getEnclosingScope(); // pop scope
     }
 
@@ -63,9 +63,10 @@ public class DefPhase extends CymbolBaseListener {
     }
 
     void defineVar(CymbolParser.TypeContext typeCtx, Token nameToken) {
+        int index = currentScope.nextVarIndex();
         int typeTokenType = typeCtx.start.getType();
         Symbol.Type type = CheckSymbols.getType(typeTokenType);
-        VariableSymbol var = new VariableSymbol(nameToken.getText(), type);
+        VariableSymbol var = new VariableSymbol(nameToken.getText(), type, index);
         currentScope.define(var); // Define symbol in current scope
     }
 }

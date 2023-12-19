@@ -1,4 +1,4 @@
-package zwischencode; /***
+/***
  * Excerpted from "The Definitive ANTLR 4 Reference",
  * published by The Pragmatic Bookshelf.
  * Copyrights apply to this code. It may not be used to create training material,
@@ -6,14 +6,10 @@ package zwischencode; /***
  * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/tpantlr2 for more book information.
  ***/
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.Token;
+package zwischencode;
+import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import zwischencodeGENERATED.*;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 public class CheckSymbols {
     public static Symbol.Type getType(int tokenType) {
@@ -30,15 +26,8 @@ public class CheckSymbols {
                 msg);
     }
 
-    public void process(String[] args) throws Exception {
-        String inputFile = null;
-        if ( args.length>0 ) inputFile = args[0];
-        InputStream is = System.in;
-        if ( inputFile!=null ) {
-            is = new FileInputStream(inputFile);
-        }
-        ANTLRInputStream input = new ANTLRInputStream(is);
-        CymbolLexer lexer = new CymbolLexer(input);
+    public String process(CharStream args) throws Exception {
+        CymbolLexer lexer = new CymbolLexer(args);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CymbolParser parser = new CymbolParser(tokens);
         parser.setBuildParseTree(true);
@@ -50,11 +39,21 @@ public class CheckSymbols {
         DefPhase def = new DefPhase();
         walker.walk(def, tree);
         // create next phase and feed symbol table info from def to ref phase
-        RefPhase ref = new RefPhase(def.globals, def.scopes);
-        walker.walk(ref, tree);
+        zwischencodegeneratePhase gen = new zwischencodegeneratePhase(def.globals, def.scopes);
+        walker.walk(gen, tree);
+        String result = gen.result.render();
+        return result;
     }
 
     public static void main(String[] args) throws Exception {
-        new CheckSymbols().process(args);
+        run();
+    }
+
+    public static String run () throws Exception {
+        String path = "src/main/resources/CymbolProgs/fact.cymbol.c";
+        CharStream cs = CharStreams.fromFileName(path);
+        String result = new CheckSymbols().process(cs);
+        System.out.println(result);
+        return result;
     }
 }

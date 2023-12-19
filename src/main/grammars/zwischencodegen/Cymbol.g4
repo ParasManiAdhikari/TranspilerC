@@ -34,7 +34,10 @@ block:  '{' stat* '}' ;
 
 assignStat:  ID '=' expr ;
 
-ifStat: 'if' '('bexpr ')' stat ('else' stat)? ;
+
+ifStat: 'if' '('bexpr ')' stat elseStat? ;
+
+elseStat: 'else' stat;
 
 forStat: 'for' '(' assignStat ';' bexpr ';' assignStat ')' stat ;
 
