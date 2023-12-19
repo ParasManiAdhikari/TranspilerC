@@ -9,7 +9,10 @@
 package zwischencode;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import zwischencode.StackInterpreter.Interpreter;
 import zwischencodeGENERATED.*;
+
+import java.util.List;
 
 public class CheckSymbols {
     public static Symbol.Type getType(int tokenType) {
@@ -44,14 +47,18 @@ public class CheckSymbols {
     }
 
     public static void main(String[] args) throws Exception {
-        run();
+        run("src/main/resources/CymbolProgs/ifgt.cymbol.c");
     }
 
-    public static String run () throws Exception {
-        String path = "src/main/resources/CymbolProgs/fact.cymbol.c";
-        CharStream cs = CharStreams.fromFileName(path);
+    public static String run (String path) throws Exception {
+        String p = "src/main/resources/CymbolProgs/rec.cymbol.c";
+        CharStream cs = CharStreams.fromFileName(p);
         String pcode = new CheckSymbols().process(cs);
         System.out.println(pcode);
+        System.out.println("INTERPRETER _...................");
+
+        List<String> ans = Interpreter.runString(pcode);
+        System.out.println(ans);
         return pcode;
     }
 }

@@ -8,13 +8,17 @@ package zwischencode.StackInterpreter; /***
 ***/
 import org.antlr.runtime.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.FileInputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 /** A simple stack-based interpreter */
 public class Interpreter {
     public static final int DEFAULT_OPERAND_STACK_SIZE = 100;
     public static final int DEFAULT_CALL_STACK_SIZE = 1000;
+    public static List<String> result = new LinkedList<>();
 
     DisAssembler disasm;
 
@@ -23,15 +27,15 @@ public class Interpreter {
     int codeSize;
     Object[] globals;   // global variable space
     protected Object[] constPool;
-	
+
     /** Operand stack, grows upwards */
     Object[] operands = new Object[DEFAULT_OPERAND_STACK_SIZE];
     int sp = -1;        // stack pointer register
-	
+
     /** Stack of stack frames, grows upwards */
     StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
     int fp = -1;        // frame pointer register
-    FunctionSymbol mainFunction;    
+    FunctionSymbol mainFunction;
 
     boolean trace = false;
 
@@ -61,6 +65,22 @@ public class Interpreter {
         if ( dump) interpreter.coredump();
     }
 
+    public static List<String> runString(String str) throws Exception {
+        result.clear();
+        // PROCESS ARGS
+        boolean trace = false;
+        boolean disassemble = false;
+        boolean dump = false;
+        InputStream input = new ByteArrayInputStream(str.getBytes());
+
+        Interpreter interpreter = new Interpreter();
+        load(interpreter, input);
+        interpreter.trace = trace;
+        interpreter.exec();
+        if ( disassemble ) interpreter.disassemble();
+        if ( dump) interpreter.coredump();
+        return result;
+    }
     public static boolean load(Interpreter interp, InputStream input) throws Exception {
         boolean hasErrors = false;
         try {
@@ -231,7 +251,8 @@ public class Interpreter {
                     struct.fields[fieldOffset] = v;
                     break;
                 case BytecodeDefinition.INSTR_PRINT :
-                    System.out.println(operands[sp--]);
+                    result.add(operands[sp--].toString());
+//                    System.out.println(operands[sp--]);
                     break;
                 case BytecodeDefinition.INSTR_STRUCT :
                     int nfields = getIntOperand();
