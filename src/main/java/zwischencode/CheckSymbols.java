@@ -51,7 +51,7 @@ public class CheckSymbols {
     }
 
     public static String run (String path) throws Exception {
-        String p = "src/main/resources/CymbolProgs/rec.cymbol.c";
+        String p = "src/main/resources/CymbolProgs/fact.cymbol.c";
         CharStream cs = CharStreams.fromFileName(p);
         String pcode = new CheckSymbols().process(cs);
         System.out.println(pcode);
