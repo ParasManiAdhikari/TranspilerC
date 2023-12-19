@@ -47,7 +47,7 @@ public class CheckSymbols {
     }
 
     public static void main(String[] args) throws Exception {
-        run("src/main/resources/CymbolProgs/ifgt.cymbol.c");
+        run("src/main/resources/CymbolProgs/ifElse.cymbol.c");
     }
 
     public static String run (String path) throws Exception {
