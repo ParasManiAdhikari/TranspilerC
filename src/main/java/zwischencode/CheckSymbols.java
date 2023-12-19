@@ -32,13 +32,11 @@ public class CheckSymbols {
         CymbolParser parser = new CymbolParser(tokens);
         parser.setBuildParseTree(true);
         ParseTree tree = parser.file();
-        // show tree in text form
-//        System.out.println(tree.toStringTree(parser));
 
         ParseTreeWalker walker = new ParseTreeWalker();
         DefPhase def = new DefPhase();
         walker.walk(def, tree);
-        // create next phase and feed symbol table info from def to ref phase
+        // create zwischencode using defphase
         zwischencodegeneratePhase gen = new zwischencodegeneratePhase(def.globals, def.scopes);
         walker.walk(gen, tree);
         String result = gen.result.render();
@@ -52,8 +50,8 @@ public class CheckSymbols {
     public static String run () throws Exception {
         String path = "src/main/resources/CymbolProgs/fact.cymbol.c";
         CharStream cs = CharStreams.fromFileName(path);
-        String result = new CheckSymbols().process(cs);
-        System.out.println(result);
-        return result;
+        String pcode = new CheckSymbols().process(cs);
+        System.out.println(pcode);
+        return pcode;
     }
 }
