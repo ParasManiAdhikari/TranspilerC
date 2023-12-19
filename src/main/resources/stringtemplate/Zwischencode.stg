@@ -86,7 +86,7 @@ done<value>:
 >>
 
 br(value)::=<<
-  br done<value>
+  br skip<value>
 
 >>
 
@@ -103,6 +103,11 @@ done<value>:
 
 enterElse(value)::=<<
 done<value>:
+
+>>
+
+skipTo(value)::=<<
+skip<value>:
 
 >>
 

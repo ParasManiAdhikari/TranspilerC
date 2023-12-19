@@ -251,8 +251,8 @@ public class Interpreter {
                     struct.fields[fieldOffset] = v;
                     break;
                 case BytecodeDefinition.INSTR_PRINT :
-//                    result.add(operands[sp--].toString());
-                    System.out.println(operands[sp--]);
+                    result.add(operands[sp--].toString());
+//                    System.out.println(operands[sp--]);
                     break;
                 case BytecodeDefinition.INSTR_STRUCT :
                     int nfields = getIntOperand();

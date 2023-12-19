@@ -40,7 +40,7 @@ public class CheckSymbols {
         DefPhase def = new DefPhase();
         walker.walk(def, tree);
         // create zwischencode using defphase
-        zwischencodegeneratePhase gen = new zwischencodegeneratePhase(def.globals, def.scopes);
+        Listener gen = new Listener(def.globals, def.scopes);
         walker.walk(gen, tree);
         String result = gen.result.render();
         return result;
@@ -55,9 +55,8 @@ public class CheckSymbols {
         CharStream cs = CharStreams.fromFileName(path);
         String pcode = new CheckSymbols().process(cs);
         System.out.println(pcode);
-//        System.out.println("INTERPRETER _...................");
-//
-//        List<String> ans = Interpreter.runString(pcode);
+
+        List<String> ans = Interpreter.runString(pcode);
 //        System.out.println(ans);
         return pcode;
     }

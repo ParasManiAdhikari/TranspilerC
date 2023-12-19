@@ -30,8 +30,8 @@ public class ZwischenTest {
             "'src/main/resources/CymbolProgs/uminus.cymbol.c', '-3'",
             "'src/main/resources/CymbolProgs/while.cymbol.c', '8'",
             "'src/main/resources/CymbolProgs/whileTwice.cymbol.c','64'",
-//            "'src/main/resources/CymbolProgs/sum.cymbol.c', '21'",
-//            "'src/main/resources/CymbolProgs/rec.cymbol.c', '24,5,12,61,91'"
+            "'src/main/resources/CymbolProgs/sum.cymbol.c', '21'",
+            "'src/main/resources/CymbolProgs/rec.cymbol.c', '24,5,12,61,91'"
     })
     void pcodeTranslationTest(String input, String result) throws Exception {
         String translation = CheckSymbols.run(input);
