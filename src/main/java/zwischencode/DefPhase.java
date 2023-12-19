@@ -12,8 +12,8 @@ import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import zwischencodeGENERATED.*;
 
 public class DefPhase extends CymbolBaseListener {
-    ParseTreeProperty<Scope> scopes = new ParseTreeProperty<Scope>();
-    GlobalScope globals;
+    public ParseTreeProperty<Scope> scopes = new ParseTreeProperty<Scope>();
+    public GlobalScope globals;
     Scope currentScope; // define symbols in this scope
     public void enterFile(CymbolParser.FileContext ctx) {
         globals = new GlobalScope(null);
@@ -27,7 +27,7 @@ public class DefPhase extends CymbolBaseListener {
     public void enterFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
         String name = ctx.ID().getText();
         int typeTokenType = ctx.type().start.getType();
-        Symbol.Type type = CheckSymbols.getType(typeTokenType);
+        Symbol.Type type = getType(typeTokenType);
 
         // push new scope by making new one that points to enclosing scope
         FunctionSymbol function = new FunctionSymbol(name, type, currentScope);
@@ -65,8 +65,17 @@ public class DefPhase extends CymbolBaseListener {
     void defineVar(CymbolParser.TypeContext typeCtx, Token nameToken) {
         int index = currentScope.nextVarIndex();
         int typeTokenType = typeCtx.start.getType();
-        Symbol.Type type = CheckSymbols.getType(typeTokenType);
+        Symbol.Type type = getType(typeTokenType);
         VariableSymbol var = new VariableSymbol(nameToken.getText(), type, index);
         currentScope.define(var); // Define symbol in current scope
+    }
+
+    public static Symbol.Type getType(int tokenType) {
+        switch ( tokenType ) {
+            case CymbolParser.K_VOID :  return Symbol.Type.tVOID;
+            case CymbolParser.K_INT :   return Symbol.Type.tINT;
+            case CymbolParser.K_FLOAT : return Symbol.Type.tFLOAT;
+        }
+        return Symbol.Type.tINVALID;
     }
 }

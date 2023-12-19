@@ -1,11 +1,20 @@
 package zwischencodegen;
 
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import zwischencode.CheckSymbols;
+import zwischencode.DefPhase;
+import zwischencode.Listener;
 import zwischencode.StackInterpreter.Interpreter;
+import zwischencodeGENERATED.CymbolLexer;
+import zwischencodeGENERATED.CymbolParser;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ZwischenTest {
@@ -34,7 +43,7 @@ public class ZwischenTest {
             "'src/main/resources/CymbolProgs/rec.cymbol.c', '24,5,12,61,91'"
     })
     void pcodeTranslationTest(String input, String result) throws Exception {
-        String translation = CheckSymbols.run(input);
+        String translation = translateToPCode(input);
 //        System.out.println(translation);
         List<String> resFromTranslation = Interpreter.runString(translation);
         StringBuilder resultsFromTranslation = new StringBuilder();
@@ -48,5 +57,23 @@ public class ZwischenTest {
         System.out.println("ANSWER");
         System.out.println(resultsFromTranslation.toString().equals(result));
         Assertions.assertEquals(result, resultsFromTranslation.toString());
+    }
+
+    private String translateToPCode(String path) throws IOException {
+        CharStream cs = CharStreams.fromFileName(path);
+        CymbolLexer lexer = new CymbolLexer(cs);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        CymbolParser parser = new CymbolParser(tokens);
+        parser.setBuildParseTree(true);
+        ParseTree tree = parser.file();
+
+        ParseTreeWalker walker = new ParseTreeWalker();
+        DefPhase def = new DefPhase();
+        walker.walk(def, tree);
+        // create zwischencode using defphase
+        Listener gen = new Listener(def.globals, def.scopes);
+        walker.walk(gen, tree);
+        String result = gen.result.render();
+        return result;
     }
 }

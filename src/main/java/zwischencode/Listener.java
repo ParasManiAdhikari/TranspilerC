@@ -1,5 +1,6 @@
 package zwischencode;
 
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.stringtemplate.v4.ST;
 import java.util.Stack;
@@ -9,7 +10,7 @@ public class Listener extends CymbolBaseListener {
     ParseTreeProperty<Scope> scopes;
     GlobalScope globals;
     Scope currentScope; // resolve symbols starting in this scope
-    ST result = Pcode.stg.getInstanceOf("result");
+    public ST result = Pcode.stg.getInstanceOf("result");
     boolean settingDef = false;
     String[] def = new String[2];
     boolean enteringFor = false;
@@ -197,11 +198,10 @@ public class Listener extends CymbolBaseListener {
         // can only handle f(...) not expr(...)
         String funcName = ctx.ID().getText();
         Symbol meth = currentScope.resolve(funcName);
-        if ( meth==null ) {
-            CheckSymbols.error(ctx.ID().getSymbol(), "no such function: "+funcName);
-        }
-        if ( meth instanceof VariableSymbol ) {
-            CheckSymbols.error(ctx.ID().getSymbol(), funcName+" is not a function");
+        if ( meth==null || meth instanceof VariableSymbol) {
+            Token t = ctx.ID().getSymbol();
+            System.err.printf("line %d:%d %s\n", t.getLine(), t.getCharPositionInLine(),
+                    "no such function: "+funcName);
         }
         result.add("append", new Pcode.Call(ctx.ID().getText()).code());
     }
