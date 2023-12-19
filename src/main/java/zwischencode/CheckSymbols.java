@@ -52,7 +52,7 @@ public class CheckSymbols {
 
     public static String run (String path) throws Exception {
         String p = "src/main/resources/CymbolProgs/fact.cymbol.c";
-        CharStream cs = CharStreams.fromFileName(p);
+        CharStream cs = CharStreams.fromFileName(path);
         String pcode = new CheckSymbols().process(cs);
         System.out.println(pcode);
         System.out.println("INTERPRETER _...................");

@@ -19,7 +19,7 @@ public class ZwischenTest {
             "'src/main/resources/CymbolProgs/ifElse.cymbol.c', '1'",
             "'src/main/resources/CymbolProgs/ifgt.cymbol.c', '1'",
             "'src/main/resources/CymbolProgs/iflt.cymbol.c', '1'",
-            "'src/main/resources/CymbolProgs/ifTrueFalse.cymbol.c', '1'",
+            "'src/main/resources/CymbolProgs/ifTrueFalse.cymbol.c', '1,4'",
             "'src/main/resources/CymbolProgs/max.cymbol.c', '5'",
             "'src/main/resources/CymbolProgs/neq.cymbol.c', '1'",
             "'src/main/resources/CymbolProgs/not.cymbol.c', '4'",

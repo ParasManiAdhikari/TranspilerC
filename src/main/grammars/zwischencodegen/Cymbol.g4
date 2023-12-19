@@ -1,9 +1,6 @@
 grammar Cymbol;
 import Clexer;
 
-@header {
-}
-
 file:  include* (functionDecl | varDecl)+ ;
 
 include: '#include' ('<stdio.h>'| '<stdbool.h>');
@@ -32,8 +29,7 @@ stat:   block
 
 block:  '{' stat* '}' ;
 
-assignStat:  ID '=' expr ;
-
+assignStat:  ID '=' expr; // {System.out.println($ID.value);};
 
 ifStat: 'if' '('bexpr ')' stat elseStat? ;
 
@@ -54,11 +50,11 @@ varDecl:   type ID ';' ;
 type:   'float' | 'int'  ;
 
 expr:   op = '-' expr           # NegateVar
-    |   expr op=('*'|'/') expr  # MulDiv
+    |   expr op=('*'|'/') expr  # MultDiv
     |   expr op=('+'|'-') expr  # AddSub
     |   ID                      # Var
     |   INT                     # Int
-    |   '(' expr ')'            # BracketExpr
+    |   '(' expr ')'            # ExprInKlammern
     |   ID '(' args ')'         # Call
     ;
 
@@ -66,5 +62,5 @@ bexpr:   '!' bexpr                          # IsNot
     |   expr op=('=='|'!='|'<'|'>') expr    # Comparison
     |   'true'                              # IsTrue
     |   'false'                             # IsFalse
-    |   '(' bexpr ')'                       # BracketBexpr
+    |   '(' bexpr ')'                       # FullBExpr
     ;

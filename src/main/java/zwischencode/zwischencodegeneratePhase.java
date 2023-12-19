@@ -31,7 +31,7 @@ public class zwischencodegeneratePhase extends CymbolBaseListener {
         if (ctx.op.getType() == CymbolParser.SUB) result.add("append", new Expr.Sub().code());
     }
 
-    public void exitMultDiv(CymbolParser.MulDivContext ctx) {
+    public void exitMultDiv(CymbolParser.MultDivContext ctx) {
         result.add("append", new Expr.Mult().code());
     }
 
@@ -136,7 +136,7 @@ public class zwischencodegeneratePhase extends CymbolBaseListener {
     public void exitIsFalse(CymbolParser.IsFalseContext ctx) {
     }
 
-    public void exitFullBExpr(CymbolParser.BracketBexprContext ctx) {
+    public void exitFullBExpr(CymbolParser.FullBExprContext ctx) {
     }
 
     public void exitPrintStat(CymbolParser.PrintStatContext ctx) {

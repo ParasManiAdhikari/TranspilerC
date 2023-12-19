@@ -1,7 +1,5 @@
 // Generated from C:/Users/paras/IdeaProjects/fsu-praktikum/src/main/grammars/zwischencodegen/Cymbol.g4 by ANTLR 4.13.1
 package zwischencodeGENERATED;
-
-
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -1252,32 +1250,6 @@ public class CymbolParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class MulDivContext extends ExprContext {
-		public Token op;
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public TerminalNode MULT() { return getToken(CymbolParser.MULT, 0); }
-		public TerminalNode DIV() { return getToken(CymbolParser.DIV, 0); }
-		public MulDivContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterMulDiv(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitMulDiv(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitMulDiv(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
 	public static class AddSubContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
@@ -1322,22 +1294,22 @@ public class CymbolParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class BracketExprContext extends ExprContext {
+	public static class ExprInKlammernContext extends ExprContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public BracketExprContext(ExprContext ctx) { copyFrom(ctx); }
+		public ExprInKlammernContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterBracketExpr(this);
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterExprInKlammern(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitBracketExpr(this);
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitExprInKlammern(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitBracketExpr(this);
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitExprInKlammern(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1378,6 +1350,32 @@ public class CymbolParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitNegateVar(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class MultDivContext extends ExprContext {
+		public Token op;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode MULT() { return getToken(CymbolParser.MULT, 0); }
+		public TerminalNode DIV() { return getToken(CymbolParser.DIV, 0); }
+		public MultDivContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterMultDiv(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitMultDiv(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitMultDiv(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1433,7 +1431,7 @@ public class CymbolParser extends Parser {
 				break;
 			case 4:
 				{
-				_localctx = new BracketExprContext(_localctx);
+				_localctx = new ExprInKlammernContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(163);
@@ -1474,15 +1472,15 @@ public class CymbolParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 					case 1:
 						{
-						_localctx = new MulDivContext(new ExprContext(_parentctx, _parentState));
+						_localctx = new MultDivContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(174);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(175);
-						((MulDivContext)_localctx).op = _input.LT(1);
+						((MultDivContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==MULT || _la==DIV) ) {
-							((MulDivContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+							((MultDivContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -1629,22 +1627,22 @@ public class CymbolParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class BracketBexprContext extends BexprContext {
+	public static class FullBExprContext extends BexprContext {
 		public BexprContext bexpr() {
 			return getRuleContext(BexprContext.class,0);
 		}
-		public BracketBexprContext(BexprContext ctx) { copyFrom(ctx); }
+		public FullBExprContext(BexprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterBracketBexpr(this);
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterFullBExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitBracketBexpr(this);
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitFullBExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitBracketBexpr(this);
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitFullBExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1705,7 +1703,7 @@ public class CymbolParser extends Parser {
 				}
 				break;
 			case 5:
-				_localctx = new BracketBexprContext(_localctx);
+				_localctx = new FullBExprContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(193);
