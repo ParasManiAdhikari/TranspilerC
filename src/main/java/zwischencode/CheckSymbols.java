@@ -47,7 +47,7 @@ public class CheckSymbols {
     }
 
     public static void main(String[] args) throws Exception {
-        run("src/main/resources/CymbolProgs/ifElse.cymbol.c");
+        run("src/main/resources/CymbolProgs/ifgt.cymbol.c");
     }
 
     public static String run (String path) throws Exception {
@@ -55,10 +55,10 @@ public class CheckSymbols {
         CharStream cs = CharStreams.fromFileName(path);
         String pcode = new CheckSymbols().process(cs);
         System.out.println(pcode);
-        System.out.println("INTERPRETER _...................");
-
-        List<String> ans = Interpreter.runString(pcode);
-        System.out.println(ans);
+//        System.out.println("INTERPRETER _...................");
+//
+//        List<String> ans = Interpreter.runString(pcode);
+//        System.out.println(ans);
         return pcode;
     }
 }

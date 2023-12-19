@@ -44,7 +44,7 @@ public class Interpreter {
         boolean trace = false;
         boolean disassemble = false;
         boolean dump = false;
-        String filename=null;
+        String filename="src/main/java/zwischencode/StackInterpreter/t9.pcode";
         int i = 0;
         while ( i<args.length ) {
             if ( args[i].equals("-trace") ) { trace = true; i++; }
@@ -251,8 +251,8 @@ public class Interpreter {
                     struct.fields[fieldOffset] = v;
                     break;
                 case BytecodeDefinition.INSTR_PRINT :
-                    result.add(operands[sp--].toString());
-//                    System.out.println(operands[sp--]);
+//                    result.add(operands[sp--].toString());
+                    System.out.println(operands[sp--]);
                     break;
                 case BytecodeDefinition.INSTR_STRUCT :
                     int nfields = getIntOperand();

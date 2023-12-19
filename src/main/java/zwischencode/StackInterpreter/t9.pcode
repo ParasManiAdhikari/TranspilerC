@@ -1,35 +1,21 @@
-.globals 1
-iconst 0
-gstore 0
-.def main: args=0, locals=2
-  iconst 0
-  store 0
-  iconst 0
-  store 1
-  iconst 1
-  load 0
-  gstore 0
-  iconst 4
-  store 0
-  gload 0
-  load 0
-  ilt
-  brf done1
-  iconst 1
-  gstore 0
-done1:
-  iconst 4
-  store 1
-  gload 0
-  load 0
-  ilt
-  brf done2
-  iconst 1
-  gload 0
-  print
-  br done3
-done2:
-  gload 1
-  print
-done3:
-  halt
+.globals 3
+.def main: args=0, locals=0
+ iconst 1
+ gstore 0
+ iconst 4
+ gstore 1
+ gload 0
+ gload 1
+ ilt
+ brt bTrue1
+ br bFalse1
+ bTrue1:
+ gload 0
+ print
+ br bNext1
+ bFalse1:
+ gload 1
+ print
+ bNext1:
+
+ halt
