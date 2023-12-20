@@ -29,7 +29,7 @@ stat:   block
 
 block:  '{' stat* '}' ;
 
-assignStat:  ID '=' expr; // {System.out.println($ID.value);};
+assignStat:  ID '=' expr;
 
 ifStat: 'if' '('bexpr ')' stat elseStat? ;
 
