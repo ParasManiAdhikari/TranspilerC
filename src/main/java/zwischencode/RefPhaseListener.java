@@ -91,10 +91,7 @@ public class RefPhaseListener extends CymbolBaseListener {
 
     public void exitComparison(CymbolParser.ComparisonContext ctx) {
         if (ctx.op.getType() == CymbolParser.LT) result.add("append", new Pcode.Ilt().code());
-        // if (ctx.op.getType() == CymbolParser.GT) result.add("append", new Expr.Equal("").code());
         if (ctx.op.getType() == CymbolParser.EQ) result.add("append", new Pcode.Equal().code());
-        // if (ctx.op.getType() == CymbolParser.NEQ) result.add("append", new Expr.Equal("").code());
-        // result.add("append", new Expr.ForStat("" + currentScope.nextScopeIndex()).code());
         int fromFor = ifForStack.pop();
         result.add("append", new Pcode.BrfTrue("" + fromFor).code());
         ifForStack.push(fromFor);
