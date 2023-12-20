@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import zwischencode.DefPhase;
-import zwischencode.Listener;
+import zwischencode.RefPhaseListener;
 import zwischencode.StackInterpreter.Interpreter;
 import zwischencodeGENERATED.CymbolLexer;
 import zwischencodeGENERATED.CymbolParser;
@@ -62,7 +62,7 @@ public class ZwischenTest {
         DefPhase def = new DefPhase();
         walker.walk(def, tree);
         // create zwischencode using defphase
-        Listener gen = new Listener(def.globals, def.scopes);
+        RefPhaseListener gen = new RefPhaseListener(def.globals, def.scopes);
         walker.walk(gen, tree);
         String result = gen.result.render();
         return result;

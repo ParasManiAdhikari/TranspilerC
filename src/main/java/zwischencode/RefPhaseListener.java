@@ -6,7 +6,7 @@ import org.stringtemplate.v4.ST;
 import java.util.Stack;
 import zwischencodeGENERATED.*;
 
-public class Listener extends CymbolBaseListener {
+public class RefPhaseListener extends CymbolBaseListener {
     ParseTreeProperty<Scope> scopes;
     GlobalScope globals;
     Scope currentScope; // resolve symbols starting in this scope
@@ -19,7 +19,7 @@ public class Listener extends CymbolBaseListener {
     Stack<Integer> ifForStack = new Stack<>();
     Stack<Integer> elseStack = new Stack<>();
 
-    public Listener(GlobalScope globals, ParseTreeProperty<Scope> scopes) {
+    public RefPhaseListener(GlobalScope globals, ParseTreeProperty<Scope> scopes) {
         this.scopes = scopes;
         this.globals = globals;
     }
