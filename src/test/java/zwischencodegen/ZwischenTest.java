@@ -28,7 +28,7 @@ public class ZwischenTest {
             "'src/main/resources/CymbolProgs/ifElse.cymbol.c', '1'",
             "'src/main/resources/CymbolProgs/ifgt.cymbol.c', '1'",
             "'src/main/resources/CymbolProgs/iflt.cymbol.c', '1'",
-//            "'src/main/resources/CymbolProgs/ifTrueFalse.cymbol.c', '1,4'",
+            "'src/main/resources/CymbolProgs/ifTrueFalse.cymbol.c', '1'",
 //            "'src/main/resources/CymbolProgs/max.cymbol.c', '5'",
             "'src/main/resources/CymbolProgs/neq.cymbol.c', '1'",
 //            "'src/main/resources/CymbolProgs/not.cymbol.c', '4'",
@@ -44,18 +44,14 @@ public class ZwischenTest {
     })
     void pcodeTranslationTest(String input, String result) throws Exception {
         String translation = translateToPCode(input);
-//        System.out.println(translation);
+        System.out.println(translation);
         List<String> resFromTranslation = Interpreter.runString(translation);
         StringBuilder resultsFromTranslation = new StringBuilder();
         for (int i = 0; i < resFromTranslation.size(); i++) {
             if (i > 0) resultsFromTranslation.append(',');
             resultsFromTranslation.append(resFromTranslation.get(i));
         }
-//        System.out.println("path: " + input);
-        System.out.println("translation:\n" +resultsFromTranslation);
-//        System.out.println("res:\n" +result);
-        System.out.println("ANSWER");
-        System.out.println(resultsFromTranslation.toString().equals(result));
+        System.out.println("translation: " +resultsFromTranslation);
         Assertions.assertEquals(result, resultsFromTranslation.toString());
     }
 

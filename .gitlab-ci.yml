@@ -71,6 +71,11 @@ callGraphTest:
   script:
     - mvn -Dtest=h5.CallgraphTest test
 
+zwischenTest:
+  stage: test
+  script:
+    - mvn -Dtest=zwischencodegen.ZwischenTest test
+
 deploy-prod:
   stage: deploy
   script:
