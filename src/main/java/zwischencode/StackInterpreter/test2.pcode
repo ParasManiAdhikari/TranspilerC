@@ -1,0 +1,9 @@
+.globals 0
+.def f: args=0, locals=0
+ iconst 30
+ ret
+
+.def main: args=0, locals=0
+ call f()
+ print
+ halt

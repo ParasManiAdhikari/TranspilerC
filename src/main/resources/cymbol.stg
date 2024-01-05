@@ -1,0 +1,122 @@
+add(e1,e2) ::= <<
+<e1>
+<e2>
+iadd
+>>
+
+sub(e1,e2) ::= <<
+<e1>
+<e2>
+isub
+>>
+
+mul(e1,e2) ::= <<
+<e1>
+<e2>
+imul
+>>
+
+varRef(v) ::= "gload <v>"
+
+gstore(e,v) ::= <<
+<e>
+gstore <v>
+>>
+
+loadParam(paramIndex) ::= <<load <paramIndex> >>
+
+const(val) ::= "iconst <val>"
+
+print(e)::= <<
+<e>
+print
+>>
+
+block(value) ::= << <value:{ item | <item><\n>}> >>
+
+function(name,args,locals,block) ::= <<
+.def <name>: args=<args>, locals=<locals>
+<block>
+ >>
+
+functionMain(name,args,locals,block) ::= <<
+.def <name>: args=<args>, locals=<locals>
+<block>
+ halt
+ >>
+
+empty() ::= ""
+
+functiondeklarationen(value) ::= << <value:{ item | <item><\n>}> >>
+
+file(num,function) ::= <<
+.globals <num>
+<function:{ item | <item><\n>}>
+>>
+
+return(e) ::= <<
+<e>
+ret
+ >>
+
+while(begin,be,bTrue,beginCode,bFalse,stat) ::= <<
+<begin>:
+<be>
+<bTrue>:
+<stat>
+<beginCode>
+<bFalse>:
+>>
+
+for(assign1,assign2,begin,be,bTrue,beginCode,bFalse,stat) ::= <<
+<assign1>
+<begin>:
+<be>
+<bTrue>:
+<stat>
+<assign2>
+<beginCode>
+<bFalse>:
+>>
+
+if(be,stat,bTrue,bFalse) ::= <<
+<be>
+<bTrue>:
+<stat>
+<bFalse>:
+>>
+
+ifElse(be,stat1,stat2,bTrue,bFalse,bNextCode,bNext) ::= <<
+<be>
+<bTrue>:
+<stat1>
+<bNextCode>
+<bFalse>:
+<stat2>
+<bNext>:
+>>
+
+equal(e1,e2)::= <<
+<e1>
+<e2>
+ieq
+>>
+
+smaller(e1,e2)::= <<
+<e1>
+<e2>
+ilt
+>>
+
+relop(e1,e2,bTrue,bFalse,operator)::= <<
+<e1>
+<e2>
+<operator>
+brt <bTrue>
+br <bFalse>
+>>
+
+trueFalse(value) ::= "br <value>"
+functionCall(name) ::= "call <name>()"
+
+call(name)::= "<name>"

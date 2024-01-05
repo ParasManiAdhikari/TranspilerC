@@ -1,0 +1,12 @@
+.globals 1
+.def main: args=0, locals=0
+ iconst 1
+ gstore 0
+ gload 0
+ iconst 2
+ ilt
+ brt const
+ const:
+  gload 0
+  print
+  halt

@@ -74,7 +74,7 @@ callGraphTest:
 zwischenTest:
   stage: test
   script:
-    - mvn -Dtest=zwischencodegen.ZwischenTest test
+    - mvn -Dtest=zwischencodegen.CymbolTest test
 
 deploy-prod:
   stage: deploy

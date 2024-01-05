@@ -9,9 +9,6 @@ package zwischencode.StackInterpreter; /***
 // $ANTLR 3.2 Sep 23, 2009 12:02:23 /Users/parrt/research/book/TPDSL/Book/code/interp/stack/Assembler.g 2009-09-23 17:37:41
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 public class AssemblerLexer extends Lexer {
     public static final int LETTER=12;

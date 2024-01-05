@@ -6,19 +6,19 @@ package zwischencode.StackInterpreter; /***
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
 ***/
-import org.antlr.runtime.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.util.LinkedList;
-import java.util.List;
+import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CommonTokenStream;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /** A simple stack-based interpreter */
 public class Interpreter {
     public static final int DEFAULT_OPERAND_STACK_SIZE = 100;
     public static final int DEFAULT_CALL_STACK_SIZE = 1000;
-    public static List<String> result = new LinkedList<>();
 
     DisAssembler disasm;
 
@@ -27,32 +27,92 @@ public class Interpreter {
     int codeSize;
     Object[] globals;   // global variable space
     protected Object[] constPool;
-
+	
     /** Operand stack, grows upwards */
     Object[] operands = new Object[DEFAULT_OPERAND_STACK_SIZE];
     int sp = -1;        // stack pointer register
-
+	
     /** Stack of stack frames, grows upwards */
     StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
     int fp = -1;        // frame pointer register
-    FunctionSymbol mainFunction;
+    FunctionSymbol mainFunction;    
 
     boolean trace = false;
-
-    public static void main(String[] args) throws Exception {
-        // PROCESS ARGS
+    public static String run2(String programm) throws Exception {
         boolean trace = false;
         boolean disassemble = false;
         boolean dump = false;
-        String filename="src/main/java/zwischencode/StackInterpreter/t9.pcode";
+        PrintStream originalStream = System.out;
+
+        // Set the standard output to use newConsole.
+        ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
+        PrintStream newStream = new PrintStream(newConsole);
+        System.setOut(newStream);
+        InputStream  input = new ByteArrayInputStream(programm.getBytes
+                (Charset.forName("UTF-8")));;
+
+        Interpreter interpreter = new Interpreter();
+        load(interpreter, input);
+        interpreter.trace = trace;
+        interpreter.exec();
+        if ( disassemble ) interpreter.disassemble();
+        if ( dump) interpreter.coredump();
+        System.setOut(originalStream);
+        newStream.flush();
+
+        String data = newConsole.toString().trim();
+
+        //System.out.println("heyyyyy: " + data);
+        newStream.close();
+        return data;
+    }
+    public static String run(String filename) throws Exception {
+        boolean trace = false;
+        boolean disassemble = false;
+        boolean dump = false;
+        PrintStream originalStream = System.out;
+
+        // Set the standard output to use newConsole.
+        ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
+        PrintStream newStream = new PrintStream(newConsole);
+        System.setOut(newStream);
+        InputStream  input = new FileInputStream(filename);
+
+        Interpreter interpreter = new Interpreter();
+        load(interpreter, input);
+        interpreter.trace = trace;
+        interpreter.exec();
+        if ( disassemble ) interpreter.disassemble();
+        if ( dump) interpreter.coredump();
+        System.setOut(originalStream);
+        newStream.flush();
+
+        String data = newConsole.toString();
+
+        //System.out.println("heyyyyy: " + data);
+        newStream.close();
+        return data;
+    }
+    public static void main(String[] args) throws Exception { // -trace -dis -dump
+        // PROCESS ARGS
+       /* boolean trace = false;
+        boolean disassemble = false;
+        boolean dump = false;
+        String filename=null;
         int i = 0;
         while ( i<args.length ) {
             if ( args[i].equals("-trace") ) { trace = true; i++; }
             else if ( args[i].equals("-dis") ) { disassemble = true; i++; }
             else if ( args[i].equals("-dump") ) { dump = true; i++; }
             else { filename = args[i]; i++; }
-        }
 
+        }
+        PrintStream originalStream = System.out;
+
+        // Set the standard output to use newConsole.
+        ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
+        PrintStream newStream = new PrintStream(newConsole);
+        System.setOut(newStream);
         InputStream input = null;
         if ( filename!=null ) input = new FileInputStream(filename);
         else input = System.in;
@@ -63,24 +123,22 @@ public class Interpreter {
         interpreter.exec();
         if ( disassemble ) interpreter.disassemble();
         if ( dump) interpreter.coredump();
+        System.setOut(originalStream);
+        newStream.flush();
+
+        String data = newConsole.toString();
+
+        System.out.println("heyyyyy: " + data);
+        newStream.close();*/
+        //previousConsole.println("test " + newConsole.toString());
+
+        String contents = Files.readString(Paths.get("src/main/java/StackInterpreter/test5.pcode")).trim();
+        String result = run("src/main/java/StackInterpreter/test5.pcode");
+        System.out.println("result: " + result);
+        String result2 = run2(contents);
+        System.out.println("result2: " + result2);
     }
 
-    public static List<String> runString(String str) throws Exception {
-        result.clear();
-        // PROCESS ARGS
-        boolean trace = false;
-        boolean disassemble = false;
-        boolean dump = false;
-        InputStream input = new ByteArrayInputStream(str.getBytes());
-
-        Interpreter interpreter = new Interpreter();
-        load(interpreter, input);
-        interpreter.trace = trace;
-        interpreter.exec();
-        if ( disassemble ) interpreter.disassemble();
-        if ( dump) interpreter.coredump();
-        return result;
-    }
     public static boolean load(Interpreter interp, InputStream input) throws Exception {
         boolean hasErrors = false;
         try {
@@ -251,8 +309,7 @@ public class Interpreter {
                     struct.fields[fieldOffset] = v;
                     break;
                 case BytecodeDefinition.INSTR_PRINT :
-                    result.add(operands[sp--].toString());
-//                    System.out.println(operands[sp--]);
+                    System.out.println(operands[sp--]);
                     break;
                 case BytecodeDefinition.INSTR_STRUCT :
                     int nfields = getIntOperand();

@@ -6,9 +6,14 @@ package zwischencode.StackInterpreter; /***
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
 ***/
-import org.antlr.runtime.*;
 
-import java.util.*;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenStream;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Subclass the AssemblerParser to actually implement the necessary
  *  symbol table management and code generation functions.

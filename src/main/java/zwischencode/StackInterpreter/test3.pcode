@@ -1,0 +1,19 @@
+.globals 1
+.def main: args=0, locals=0
+ iconst 0
+ gstore 0
+ loop:
+ gload 0
+ iconst 10
+ ilt
+ brf done
+  gload 0
+  print
+  gload 0
+  iconst 1
+  iadd
+  gstore 0
+
+ br loop
+ done:
+ halt

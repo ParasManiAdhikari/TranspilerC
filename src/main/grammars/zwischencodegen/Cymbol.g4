@@ -16,24 +16,22 @@ formalParameter
     :   type ID
     ;
 
-stat:   block
-    |   varDecl
-    |   ifStat
-    |   forStat
-    |   whileStat
-    |   returnStat ';'
-    |   assignStat  ';'
-    |   printStat  ';'
-    |   expr ';'
+stat:   block               # StatBlock
+    |   varDecl             # Variable
+    |   ifStat	            # IfElse
+    |   forStat             # Forloop
+    |   whileStat			# Whileloop
+    |   returnStat ';'      # Return
+    |   assignStat  ';'     # Assign
+    |   printStat  ';'      # Print
+    |   expr ';'            # Expression
     ;
 
 block:  '{' stat* '}' ;
 
 assignStat:  ID '=' expr;
 
-ifStat: 'if' '('bexpr ')' stat elseStat? ;
-
-elseStat: 'else' stat;
+ifStat: 'if' '(' bexpr ')' stat ('else' stat)? ;
 
 forStat: 'for' '(' assignStat ';' bexpr ';' assignStat ')' stat ;
 
@@ -41,26 +39,24 @@ whileStat: 'while' '('bexpr')' stat ;
 
 returnStat: 'return' expr ;
 
-args : (expr (',' expr)*)? ;
-
 printStat: 'printf' '(' FORMAT ',' expr ')';
 
 varDecl:   type ID ';' ;
 
 type:   'float' | 'int'  ;
 
-expr:   op = '-' expr           # NegateVar
-    |   expr op=('*'|'/') expr  # MultDiv
+expr:   op = '-' expr           # Negate
+    |   expr op=('*'|'/') expr  # MulDiv
     |   expr op=('+'|'-') expr  # AddSub
     |   ID                      # Var
     |   INT                     # Int
-    |   '(' expr ')'            # ExprInKlammern
-    |   ID '(' args ')'         # Call
+    |   '(' expr ')'            # Parens
+    |   ID '(' (expr (',' expr)*)? ')'         # Call
     ;
 
-bexpr:   '!' bexpr                          # IsNot
-    |   expr op=('=='|'!='|'<'|'>') expr    # Comparison
-    |   'true'                              # IsTrue
-    |   'false'                             # IsFalse
-    |   '(' bexpr ')'                       # FullBExpr
+bexpr:   '!' bexpr                          # Not
+    |   expr op=('=='|'!='|'<'|'>') expr    # Vergleich
+    |   'true'                              # True
+    |   'false'                             # False
+    |   '(' bexpr ')'                       # VergleichParens
     ;

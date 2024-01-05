@@ -6,7 +6,8 @@ package zwischencode.StackInterpreter; /***
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
 ***/
-import java.util.*;
+
+import java.util.Vector;
 
 public class LabelSymbol {
     String name;
