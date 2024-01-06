@@ -108,7 +108,7 @@ smaller(e1,e2)::= <<
 ilt
 >>
 
-relop(e1,e2,bTrue,bFalse,operator)::= <<
+break(e1,e2,bTrue,bFalse,operator)::= <<
 <e1>
 <e2>
 <operator>

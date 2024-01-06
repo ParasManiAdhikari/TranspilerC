@@ -127,19 +127,15 @@ public class Listener extends CymbolBaseListener {
     }
 
     public void exitIfStat(CymbolParser.IfStatContext ctx) {
-        // the labels for the Boolean expression
         String bTrue = getBWert(ctx.bexpr()).getbTrue();
         String bFalse = getBWert(ctx.bexpr()).getbFalse();
         int len = ctx.stat().size();
-        // den booleschen Ausdruck mit den Sprüngen
         ST bexpr = getCode(ctx.bexpr());
         ST result;
         ST stat1 = getCode(ctx.stat(0));
-        // check whether it is ifelse
         if (len > 1) {
             String bNext = "bNext" + getBWert(ctx.bexpr()).getIndex();
             ST stat2 = getCode(ctx.stat(1));
-            // unconditional jumps to the end if True off was evaluated
             ST bNextCode = templates.getInstanceOf("trueFalse").add("value",bNext);
             result = templates.getInstanceOf("ifElse").add("be",bexpr).add("stat1",stat1).add("stat2",stat2).add("bTrue",bTrue).add("bFalse",bFalse).add("bNextCode",bNextCode).add("bNext",bNext);
         } else {
@@ -166,7 +162,6 @@ public class Listener extends CymbolBaseListener {
 
     }
     public void exitWhileStat(CymbolParser.WhileStatContext ctx) {
-
         String bTrue = getBWert(ctx.bexpr()).getbTrue();
         String bFalse = getBWert(ctx.bexpr()).getbFalse();
         String begin = "begin" + getBWert(ctx.bexpr()).getIndex();
@@ -326,14 +321,14 @@ public class Listener extends CymbolBaseListener {
 
         ST result;
         if ( ctx.op.getType() == CymbolParser.EQUALS ){
-            result = templates.getInstanceOf("relop").add("e1",left).add("e2",right).add("bTrue",bTrue).add("bFalse",bFalse).add("operator","ieq");
+            result = templates.getInstanceOf("break").add("e1",left).add("e2",right).add("bTrue",bTrue).add("bFalse",bFalse).add("operator","ieq");
         } else if ( ctx.op.getType() == CymbolParser.UNEQUALS ) {
-            result = templates.getInstanceOf("relop").add("e1",left).add("e2",right).add("bTrue",bFalse).add("bFalse",bTrue).add("operator","ieq");
+            result = templates.getInstanceOf("break").add("e1",left).add("e2",right).add("bTrue",bFalse).add("bFalse",bTrue).add("operator","ieq");
         } else if (ctx.op.getType() == CymbolParser.SMALLER) {
 
-            result = templates.getInstanceOf("relop").add("e1",left).add("e2",right).add("bTrue",bTrue).add("bFalse",bFalse).add("operator","ilt");
+            result = templates.getInstanceOf("break").add("e1",left).add("e2",right).add("bTrue",bTrue).add("bFalse",bFalse).add("operator","ilt");
         } else {
-            result = templates.getInstanceOf("relop").add("e1",right).add("e2",left).add("bTrue",bTrue).add("bFalse",bFalse).add("operator","ilt");        }
+            result = templates.getInstanceOf("break").add("e1",right).add("e2",left).add("bTrue",bTrue).add("bFalse",bFalse).add("operator","ilt");        }
 
         setCode(ctx,result);
     }
