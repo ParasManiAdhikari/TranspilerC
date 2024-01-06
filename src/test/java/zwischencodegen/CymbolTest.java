@@ -21,6 +21,7 @@ public class CymbolTest {
     @ParameterizedTest
     @CsvSource({"src/main/resources/CymbolProgs/for.cymbol.c,8",
             "src/main/resources/CymbolProgs/fib.cymbol.c,5",
+            "src/main/resources/CymbolProgs/fact.cymbol.c,6",
             "src/main/resources/CymbolProgs/evenodd.cymbol.c, '1001'",
             "src/main/resources/CymbolProgs/for.cymbol.c,8",
             "src/main/resources/CymbolProgs/funcCall.cymbol.c,30",
@@ -29,6 +30,10 @@ public class CymbolTest {
             "src/main/resources/CymbolProgs/iflt.cymbol.c,1",
             "src/main/resources/CymbolProgs/ifTrueFalse.cymbol.c,1",
             "src/main/resources/CymbolProgs/max.cymbol.c,5",
+            "src/main/resources/CymbolProgs/rec.cymbol.c,245126191",
+            "src/main/resources/CymbolProgs/sum.cymbol.c,2121",
+            "src/main/resources/CymbolProgs/uebungA.cymbol.c,-173",
+            "src/main/resources/CymbolProgs/uminus.cymbol.c,-3",
             "src/main/resources/CymbolProgs/neq.cymbol.c,1",
             "src/main/resources/CymbolProgs/not.cymbol.c,4",
             "src/main/resources/CymbolProgs/printf.cymbol.c,7",
