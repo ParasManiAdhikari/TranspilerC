@@ -20,10 +20,7 @@ import java.util.List;
 
 public class ServicesTest {
 
-    private static String sucess = "Sucess";
-
-    @DataPoint
-    public static List<String> Sucess = Arrays.asList("1", "1", "0", "0");
+    private static String success = "Success";
 
 
     @Test
@@ -40,8 +37,7 @@ public class ServicesTest {
         walker.walk(loader, tree);
 
         LexAnalysator lexAnalysator = new LexAnalysator();
-        String result = lexAnalysator.automat(Sucess, loader.table);
-//        String result = lexAnalysator.automat("START_start", loader.table);
-        Assert.assertEquals(result, sucess);
+        String result = lexAnalysator.automat(loader.table);
+        Assert.assertEquals(result, success);
     }
 }
