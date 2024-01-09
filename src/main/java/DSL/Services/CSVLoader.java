@@ -37,7 +37,7 @@ public class CSVLoader extends CSVBaseListener {
     }
 
     Set<String> nodes = new HashSet<>();
-    MultiMap<String, String> edges = new MultiMap<String, String>();
+    MultiMap<String, String> edges = new MultiMap<>();
     public HashMap<String[], HashMap<String, String>> table = new HashMap<>();
     List<String> headerList;
     List<String> currentRow;

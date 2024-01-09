@@ -10,19 +10,10 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.theories.DataPoint;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-
-
 public class ServicesTest {
-
-    private static String success = "Success";
-
-
     @Test
     public void csvTest() throws Exception {
         InputStream is = new FileInputStream("src/main/java/DSL/Services/automat.csv");
@@ -38,6 +29,7 @@ public class ServicesTest {
 
         LexAnalysator lexAnalysator = new LexAnalysator();
         String result = lexAnalysator.automat(loader.table);
+        String success = "Success";
         Assert.assertEquals(result, success);
     }
 }
