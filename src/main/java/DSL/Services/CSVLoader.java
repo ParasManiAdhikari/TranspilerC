@@ -16,26 +16,6 @@ import java.io.*;
 import java.util.*;
 
 public class CSVLoader extends CSVBaseListener {
-    public static void main(String[] args) throws Exception {
-        String inputFile = null;
-        if (args.length > 0) inputFile = args[0];
-        InputStream is = System.in;
-        if (inputFile != null)
-            is = new FileInputStream(inputFile);
-        CSVLexer lexer = new CSVLexer(new ANTLRInputStream(is));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        CSVParser parser = new CSVParser(tokens);
-        parser.setBuildParseTree(true);
-        ParseTree tree = parser.file();
-
-        ParseTreeWalker walker = new ParseTreeWalker();
-        CSVLoader loader = new CSVLoader();
-        walker.walk(loader, tree);
-        System.out.println(loader.table);
-        loader.fillEdgesNodes();
-        writeFile(loader.toDOT(), "CSVDot");
-    }
-
     Set<String> nodes = new HashSet<>();
     MultiMap<String, String> edges = new MultiMap<>();
     public HashMap<String[], HashMap<String, String>> table = new HashMap<>();
