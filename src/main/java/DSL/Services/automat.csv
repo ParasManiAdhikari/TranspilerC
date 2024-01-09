@@ -1,4 +1,5 @@
 StartZustand,FinalZustand
 START_start,X
 X,Y
-Y,_end
+Y,Z
+Z,_end
