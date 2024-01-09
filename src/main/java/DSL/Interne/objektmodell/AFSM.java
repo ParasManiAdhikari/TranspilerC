@@ -1,4 +1,4 @@
-package DSL.Interne.Objektmodell;
+package DSL.Interne.objektmodell;
 
 import java.util.LinkedList;
 import java.util.List;

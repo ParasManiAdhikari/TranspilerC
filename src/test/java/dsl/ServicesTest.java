@@ -43,4 +43,20 @@ public class ServicesTest {
         String result = lexAnalysator.automat(Sucess, loader.table);
         Assert.assertEquals(result, sucess);
     }
+
+    @Test
+    public void csvTest2() throws Exception {
+        InputStream is = new FileInputStream("src/test/resources/automat.csv");
+        CSVLexer lexer = new CSVLexer( new ANTLRInputStream(is) );
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        CSVParser parser = new CSVParser(tokens);
+        parser.setBuildParseTree(true);
+        ParseTree tree = parser.file();
+        ParseTreeWalker walker = new ParseTreeWalker();
+        CSVLoader loader = new CSVLoader();
+        walker.walk(loader, tree);
+        LexAnalysator lexAnalysator = new LexAnalysator();
+//        String result = lexAnalysator.automat("START_start" , loader.table);
+//        assertEquals(result, "Success");
+    }
 }

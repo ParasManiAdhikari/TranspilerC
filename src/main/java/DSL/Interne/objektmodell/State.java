@@ -1,16 +1,10 @@
-package DSL.Interne.Objektmodell;
+package DSL.Interne.objektmodell;
 
 public class State {
 
     private String id;
     private boolean initial;
     private boolean accepted;
-
-    public State() { }
-
-    public State(String id) {
-        this.id = id;
-    }
 
     public State(String id, boolean initial, boolean accepted) {
         this.id = id;

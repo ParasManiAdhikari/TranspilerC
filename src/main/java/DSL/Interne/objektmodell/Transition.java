@@ -1,16 +1,12 @@
-package DSL.Interne.Objektmodell;
+package DSL.Interne.objektmodell;
 
 public class Transition {
 
     private State source;
-    private String event;
     private State target;
 
-    public Transition() { }
-
-    public Transition(State source, String event, State target) {
+    public Transition(State source, State target) {
         this.source = source;
-        this.event = event;
         this.target = target;
     }
 
@@ -22,13 +18,6 @@ public class Transition {
         this.source = source;
     }
 
-    public String getEvent() {
-        return event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
-    }
 
     public State getTarget() {
         return target;

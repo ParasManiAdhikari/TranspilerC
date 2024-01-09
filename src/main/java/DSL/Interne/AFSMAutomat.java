@@ -1,8 +1,8 @@
 package DSL.Interne;
 
 import DSL.Interne.FluentApi.AFSMImpl;
-import DSL.Interne.Objektmodell.State;
-import DSL.Interne.Objektmodell.Transition;
+import DSL.Interne.objektmodell.State;
+import DSL.Interne.objektmodell.Transition;
 
 public class AFSMAutomat {
 
@@ -12,39 +12,29 @@ public class AFSMAutomat {
         afsm = new AFSMImpl();
     }
 
-    public void createAutomat1(){
-        State q0;
-        State q1;
+    public void createLoginAutomat(){
+        State initialState = new State("InitialState", true, false);
+        State usernameEnteredState = new State("UsernameEnteredState", false, false);
+        State acceptState = new State("AcceptState", false, true);
 
-        q0 = new State("q0", true, false);
-        q1 = new State("q1", false, true);
-
-        afsm.addState(q0).addState(q1)
-                .addTransition(new Transition(q0, "b", q0))
-                .addTransition(new Transition(q0,"a" , q1));
-
+        afsm.addState(initialState).addState(usernameEnteredState).addState(acceptState)
+                .addTransition(new Transition(initialState,  usernameEnteredState))
+                .addTransition(new Transition(usernameEnteredState, acceptState));
     }
 
-    public void createAutomat2(){
-        State q0;
-
-        q0 = new State("q0", true, true);
-        afsm.addState(q0).addTransition(new Transition(q0,"a", q0));
+    public void createLoopingAlarmSystemAutomat(){
+        State alarmState = new State("AlarmState", true, true);
+        afsm.addState(alarmState)
+                .addTransition(new Transition(alarmState,  alarmState));
     }
 
-    public void createAutomat3(){
-        State q0;
-        State q1;
-        State q2;
+    public void createVendingMachineAutomat(){
+        State initialState = new State("InitialState", true, false);
+        State selectionState = new State("SelectionState", false, false);
+        State acceptState = new State("AcceptState", false, true);
 
-        q0 = new State("q0", true, false);
-        q1 = new State("q1", false, false);
-        q2 = new State("q2", false, true);
-
-        afsm.addState(q0).addState(q1).addState(q2)
-                .addTransition(new Transition(q0, "a", q1))
-                .addTransition(new Transition(q0, "b", q1))
-                .addTransition(new Transition(q1, "a", q2))
-                .addTransition(new Transition(q1, "b", q2));
+        afsm.addState(initialState).addState(selectionState).addState(acceptState)
+                .addTransition(new Transition(initialState, selectionState))
+                .addTransition(new Transition(selectionState,  acceptState));
     }
 }

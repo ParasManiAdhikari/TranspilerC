@@ -1,46 +1,57 @@
 package DSL.Interne.FluentApi;
 
-
-
-import DSL.Interne.Objektmodell.State;
-import DSL.Interne.Objektmodell.Transition;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class AFSMImpl implements AFSM {
+import DSL.Interne.objektmodell.State;
+import DSL.Interne.objektmodell.Transition;
 
-    private State initialState;
-    HashMap<State, HashMap<String, ActionStatePair>> afsm = new HashMap<>();
+public class AFSMImpl implements AFSM
+{
 
-    public AFSMImpl() { }
+	private State initialState;
+	HashMap<State, StateStatePair> afsm
+			= new HashMap<>();
 
-    public AFSM addState(State id) {
-        if (initialState == null) initialState = id;
-        if (afsm.containsKey(id)) return this;
-        afsm.put(id, new HashMap<>());
-        return this;
-    }
+	public AFSMImpl()
+	{
+	}
 
-    public AFSM addTransition(Transition transition) {
-        if (afsm.get(transition.getSource()).containsKey(transition.getEvent())) return this;
-        afsm.get(transition.getSource()).put(transition.getEvent(), new ActionStatePair(transition.getEvent(), transition.getTarget()));
-        return this;
-    }
+	public AFSM addState(State id)
+	{
+		if (initialState == null) initialState = id;
+		if (afsm.containsKey(id)) return this;
+		afsm.put(id, new StateStatePair(id, null));
+		return this;
+	}
 
-    public State getInitialState(){
-        return initialState;
-    }
+	public AFSM addTransition(Transition transition)
+	{
+		if (afsm.get(transition.getSource()).target != null) return this;
+		afsm.get(transition.getSource())
+				.target = transition.getTarget();
+		return this;
+	}
 
-    public ActionStatePair makeTransition(State state, String event) {
-        if (!afsm.containsKey(state)) {
-            System.out.println("FIRST");
-            return null;
-        }
-        if (!afsm.get(state).containsKey(event)) {
-            System.out.println("SECOND");
-            return null;
-        }
-        return afsm.get(state).get(event);
-    }
+	public State getInitialState()
+	{
+		return initialState;
+	}
+
+	public StateStatePair makeTransition(State state)
+	{
+		if (!afsm.containsKey(state))
+		{
+			System.out.println("State not found");
+			return null;
+		}
+		return afsm.get(state);
+	}
+
+	public List<State> getStates()
+	{
+		return new ArrayList<>(afsm.keySet());
+	}
 
 }
