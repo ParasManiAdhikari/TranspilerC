@@ -123,7 +123,7 @@ public class CSVLoader extends CSVBaseListener {
     @SuppressWarnings("Duplicates")
     public String toDOT() throws IOException {
 
-        STGroup stG = new STGroupFile("src/main/java/DSL/Aufgabe3/template.stg");
+        STGroup stG = new STGroupFile("src/main/java/DSL/Services/template.stg");
         ST newDot = stG.getInstanceOf("DOT");
         newDot.add("ranksep", .25);
         newDot.add("arrowsize", .6);

@@ -57,8 +57,6 @@ public class InterneTest {
         interpreter.run(afsmAutomat.afsm, "InitialState");
         assertTrue(interpreter.state.isAccepted());
     }
-    @DataPoint
-    public static List<String> Sucess = Arrays.asList("1", "1", "0", "0");
 }
 
 
