@@ -1,0 +1,8 @@
+0,1,0
+START_start,X,Y
+X,XEnd,Y
+XEnd_end,XEnd,Y
+Y,X,YEnd
+YEnd_end,X,YEnd
+
+
