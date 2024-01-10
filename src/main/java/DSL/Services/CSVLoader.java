@@ -3,6 +3,8 @@ package DSL.Services;
 import DSL.CSVBaseListener;
 import DSL.CSVLexer;
 import DSL.CSVParser;
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.MultiMap;
@@ -16,6 +18,29 @@ import java.io.*;
 import java.util.*;
 
 public class CSVLoader extends CSVBaseListener {
+    public static void main(String[] args) throws Exception {
+        InputStream is = new FileInputStream("src/main/java/DSL/Services/automat.csv");
+
+        CSVLexer lexer = new CSVLexer(new ANTLRInputStream(is));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        CSVParser parser = new CSVParser(tokens);
+        parser.setBuildParseTree(true);
+        ParseTree tree = parser.file();
+        ParseTreeWalker walker = new ParseTreeWalker();
+        CSVLoader loader = new CSVLoader();
+        walker.walk(loader, tree);
+        System.out.println(loader.table);
+        loader.fillEdgesNodes();
+
+        BufferedWriter writer;
+        File file = new File("CSVDot" + ".dot");
+        writer = new BufferedWriter(new FileWriter(file));
+        writer.write(loader.toDOT());
+
+        Graphviz gv = Graphviz.fromString(loader.toDOT());
+        gv.render(Format.SVG).toFile(new File("CSV.svg"));
+        writer.close();
+    }
     Set<String> nodes = new HashSet<>();
     MultiMap<String, String> edges = new MultiMap<>();
     public HashMap<String[], HashMap<String, String>> table = new HashMap<>();
