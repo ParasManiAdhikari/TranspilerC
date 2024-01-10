@@ -12,9 +12,9 @@ public class AFSMAutomat {
         afsm = new AFSMImpl();
     }
 
-    public void createLoginAutomat(){
+    public void createCheckoutAutomat(){
         State initialState = new State("InitialState", true, false);
-        State usernameEnteredState = new State("UsernameEnteredState", false, false);
+        State usernameEnteredState = new State("MoneyPaidState", false, false);
         State acceptState = new State("AcceptState", false, true);
 
         afsm.addState(initialState).addState(usernameEnteredState).addState(acceptState)

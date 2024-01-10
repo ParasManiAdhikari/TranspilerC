@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class InterneTest {
 
     @Test
-    public void testLoginAutomat(){
+    public void testCheckoutAutomat(){
 
         AFSMAutomat afsmAutomat = new AFSMAutomat();
-        afsmAutomat.createLoginAutomat();
+        afsmAutomat.createCheckoutAutomat();
         AFSMInterpreter interpreter = new AFSMInterpreter();
         interpreter.run(afsmAutomat.afsm, "InitialState");
         assertTrue(interpreter.state.isAccepted());
@@ -30,7 +30,7 @@ public class InterneTest {
     }
 
     @Test
-    public void test3(){
+    public void testVendingMachineAutomat(){
 
         AFSMAutomat afsmAutomat = new AFSMAutomat();
         afsmAutomat.createVendingMachineAutomat();
