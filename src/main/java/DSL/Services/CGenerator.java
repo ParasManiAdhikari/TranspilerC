@@ -11,7 +11,7 @@ import org.stringtemplate.v4.StringRenderer;
 import java.util.LinkedList;
 import java.util.List;
 
-public class afsmCGenerator {
+public class CGenerator {
 
     public static void main(String[] args) {
         AFSMImpl afsm1 = new AFSMImpl();
