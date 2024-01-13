@@ -1,6 +1,7 @@
 package DSL.Interne;
 
 import DSL.Interne.FluentApi.AFSMImpl;
+import DSL.Interne.objektmodell.AFSM;
 import DSL.Interne.objektmodell.State;
 import DSL.Interne.objektmodell.Transition;
 
@@ -14,12 +15,13 @@ public class AFSMAutomat {
 
     public void createCheckoutAutomat(){
         State initialState = new State("InitialState", true, false);
-        State usernameEnteredState = new State("MoneyPaidState", false, false);
+        State moneypaidState = new State("MoneyPaidState", false, false);
         State acceptState = new State("AcceptState", false, true);
 
-        afsm.addState(initialState).addState(usernameEnteredState).addState(acceptState)
-                .addTransition(new Transition(initialState,  usernameEnteredState))
-                .addTransition(new Transition(usernameEnteredState, acceptState));
+        afsm.addState(initialState).addState(moneypaidState).addState(acceptState)
+                .addTransition(new Transition(initialState, moneypaidState))
+                .addTransition(new Transition(moneypaidState, acceptState));
+
     }
 
     public void createLoopingAlarmSystemAutomat(){

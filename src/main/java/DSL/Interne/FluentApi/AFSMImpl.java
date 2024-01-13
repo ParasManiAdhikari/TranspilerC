@@ -54,4 +54,8 @@ public class AFSMImpl implements AFSM
 		return new ArrayList<>(afsm.keySet());
 	}
 
+	public State getDestination(State s){
+		return afsm.get(s).target;
+	}
+
 }

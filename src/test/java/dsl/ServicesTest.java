@@ -28,8 +28,7 @@ public class ServicesTest {
         walker.walk(loader, tree);
 
         LexAnalysator lexAnalysator = new LexAnalysator();
-        String result = lexAnalysator.automat(loader.table);
-        String success = "Success";
-        Assert.assertEquals(result, success);
+        Boolean result = lexAnalysator.automat(loader.table);
+        Assert.assertTrue(result);
     }
 }
