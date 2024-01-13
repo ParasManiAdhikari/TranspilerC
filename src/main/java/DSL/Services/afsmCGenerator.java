@@ -14,22 +14,27 @@ import java.util.List;
 public class afsmCGenerator {
 
     public static void main(String[] args) {
-        AFSMImpl afsm = new AFSMImpl();
+        AFSMImpl afsm1 = new AFSMImpl();
+        AFSMImpl afsm2 = new AFSMImpl();
+        State alarmState = new State("AlarmState", true, true);
+        afsm1.addState(alarmState)
+                .addTransition(new Transition(alarmState,  alarmState));
+
         State initialState = new State("InitialState", true, false);
         State moneypaidState = new State("MoneyPaidState", false, false);
         State acceptState = new State("AcceptState", false, true);
 
-        afsm.addState(initialState).addState(moneypaidState).addState(acceptState)
+        afsm2.addState(initialState).addState(moneypaidState).addState(acceptState)
                 .addTransition(new Transition(initialState, moneypaidState))
                 .addTransition(new Transition(moneypaidState, acceptState));
 
-        String result = generateC(afsm);
+        String result = generateC(afsm2);
         System.out.println(result);
-
     }
+
     private static class TGroup {
-        public String start;
-        public String destination;
+        public String stateid;
+        public String target;
     }
 
     public static String generateC(AFSMImpl afsm){
@@ -50,11 +55,12 @@ public class afsmCGenerator {
             }
         }
         for(State s: afsm.getStates()){
-            if(!s.isAccepted()){
+            Boolean isLoopState = s.isInitial() && s.isAccepted();
+            if(!s.isAccepted() || isLoopState){
                 TGroup tg = new TGroup();
-                tg.start = s.getStateID();
+                tg.stateid = s.getStateID();
                 State destination = afsm.getDestination(s);
-                tg.destination = destination.getStateID();
+                tg.target = destination.getStateID();
                 tgroups.add(tg);
             }
         }

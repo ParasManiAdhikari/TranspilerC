@@ -1,7 +1,6 @@
 package DSL.Interne;
 
 import DSL.Interne.FluentApi.AFSMImpl;
-import DSL.Interne.objektmodell.AFSM;
 import DSL.Interne.objektmodell.State;
 import DSL.Interne.objektmodell.Transition;
 
@@ -28,6 +27,7 @@ public class AFSMAutomat {
         State alarmState = new State("AlarmState", true, true);
         afsm.addState(alarmState)
                 .addTransition(new Transition(alarmState,  alarmState));
+
     }
 
     public void createVendingMachineAutomat(){
