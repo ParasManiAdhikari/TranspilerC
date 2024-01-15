@@ -22,11 +22,13 @@ public class CGenerator {
 
         State initialState = new State("InitialState", true, false);
         State moneypaidState = new State("MoneyPaidState", false, false);
+        State alternateState = new State("AlternateState", false, false);
         State acceptState = new State("AcceptState", false, true);
 
         afsm2.addState(initialState).addState(moneypaidState).addState(acceptState)
-                .addTransition(new Transition(initialState, moneypaidState))
-                .addTransition(new Transition(moneypaidState, acceptState));
+                .addTransition(new Transition(initialState, moneypaidState, 1))
+                .addTransition(new Transition(initialState, alternateState, 2))
+                .addTransition(new Transition(moneypaidState, acceptState, 1));
 
         String result = generateC(afsm2);
         System.out.println(result);
@@ -35,10 +37,12 @@ public class CGenerator {
     private static class TGroup {
         public String stateid;
         public String target;
+        public int event;
     }
 
     public static String generateC(AFSMImpl afsm){
         // Data for string template
+
         List<String> states = new LinkedList<>();
         List<TGroup> tgroups = new LinkedList<>();
         String initialState = null;
@@ -54,15 +58,13 @@ public class CGenerator {
                 acceptedState = s.getStateID();
             }
         }
-        for(State s: afsm.getStates()){
-            Boolean isLoopState = s.isInitial() && s.isAccepted();
-            if(!s.isAccepted() || isLoopState){
-                TGroup tg = new TGroup();
-                tg.stateid = s.getStateID();
-                State destination = afsm.getDestination(s);
-                tg.target = destination.getStateID();
-                tgroups.add(tg);
-            }
+        List<Transition> tr = afsm.getTransitions();
+        for(Transition t: tr){
+            TGroup tg = new TGroup();
+            tg.stateid = t.getSource().getStateID();
+            tg.target = t.getTarget().getStateID();
+            tg.event = t.getEvent();
+            tgroups.add(tg);
         }
 
         // String template

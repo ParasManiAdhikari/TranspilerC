@@ -11,6 +11,8 @@ public class AFSMImpl implements AFSM
 {
 
 	private State initialState;
+
+	private List<Transition> transitions = new ArrayList<>();
 	HashMap<State, StateStatePair> afsm
 			= new HashMap<>();
 
@@ -28,9 +30,10 @@ public class AFSMImpl implements AFSM
 
 	public AFSM addTransition(Transition transition)
 	{
-		if (afsm.get(transition.getSource()).target != null) return this;
+//		if (afsm.get(transition.getSource()).target != null) return this;
 		afsm.get(transition.getSource())
 				.target = transition.getTarget();
+		transitions.add(transition);
 		return this;
 	}
 
@@ -56,6 +59,10 @@ public class AFSMImpl implements AFSM
 
 	public State getDestination(State s){
 		return afsm.get(s).target;
+	}
+
+	public List<Transition> getTransitions(){
+		return transitions;
 	}
 
 }

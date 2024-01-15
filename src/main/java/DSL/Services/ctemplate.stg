@@ -1,15 +1,19 @@
+tgroup(g) ::= <<
+        case <g.stateid; format="upper">:
+            <if(g.event)>if (event == <g.event>) {
+                return <g.target; format="upper">;
+            } <else>else {
+                return UNDEFINED;
+            }<endif>
+>>
+
 main(states, initial, accept, tgroups) ::= <<
 enum State { <states; format="upper", separator=", "> };
 enum State initial = <initial; format="upper">;
 enum State acceptState = <accept; format="upper">;
-enum State next(enum State s) {
+enum State next(enum State s, int event) {
     switch(s) {
     <tgroups:tgroup(); separator="\n">
         default: return UNDEFINED;
     }
 }>>
-
-tgroup(g) ::= <<
-        case <g.stateid; format="upper">:
-            return <g.target; format="upper">;
->>

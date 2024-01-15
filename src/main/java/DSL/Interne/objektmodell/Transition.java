@@ -5,9 +5,17 @@ public class Transition {
     private State source;
     private State target;
 
+    private int event;
+
     public Transition(State source, State target) {
         this.source = source;
         this.target = target;
+    }
+
+    public Transition(State source, State target, int event) {
+        this.source = source;
+        this.target = target;
+        this.event = event;
     }
 
     public State getSource() {
@@ -26,5 +34,11 @@ public class Transition {
     public void setTarget(State target) {
         this.target = target;
     }
+
+    public int getEvent() {
+        return event;
+    }
+
+
 
 }
