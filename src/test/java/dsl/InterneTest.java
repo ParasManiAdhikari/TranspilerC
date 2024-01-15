@@ -3,6 +3,8 @@ package dsl;
 import DSL.Interne.AFSMAutomat;
 import DSL.Interne.AFSMInterpreter;
 import org.junit.jupiter.api.Test;
+
+import static DSL.Services.CGenerator.generateC;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -15,6 +17,7 @@ public class InterneTest {
         afsmAutomat.createCheckoutAutomat();
         AFSMInterpreter interpreter = new AFSMInterpreter();
         interpreter.run(afsmAutomat.afsm, "InitialState");
+        System.out.println(generateC(afsmAutomat.afsm));
         assertTrue(interpreter.state.isAccepted());
     }
 
@@ -23,9 +26,9 @@ public class InterneTest {
 
         AFSMAutomat afsmAutomat = new AFSMAutomat();
         afsmAutomat.createLoopingAlarmSystemAutomat();
-
         AFSMInterpreter interpreter = new AFSMInterpreter();
         interpreter.run(afsmAutomat.afsm, "AlarmState");
+        System.out.println(generateC(afsmAutomat.afsm));
         assertTrue(interpreter.state.isAccepted());
     }
 
@@ -36,6 +39,7 @@ public class InterneTest {
         afsmAutomat.createVendingMachineAutomat();
         AFSMInterpreter interpreter = new AFSMInterpreter();
         interpreter.run(afsmAutomat.afsm, "InitialState");
+        System.out.println(generateC(afsmAutomat.afsm));
         assertTrue(interpreter.state.isAccepted());
     }
 }
