@@ -1,5 +1,6 @@
 # Assembly Code Generator
 ## This is a assembly code generation project made with Java that uses ANTLR grammar. 
+## ASSEMBLY INTERPRETER ALSO INCLUDED
 C code is translated into assembly code for a virtual machine (VM).
 [TASK IN DETAIL](https://github.com/parasxdhikari/CompilerC/blob/main/CompilerQuestion.md)
 - The source code is Cymbol which is a dumbed down version of C.
