@@ -1,11 +1,11 @@
-# C code Compiler
-## This is a compiler project made with Java that uses ANTLR grammar. 
-The source code is translated into assembly code for a virtual machine (VM).
+# Assembly Code Generator
+## This is a assembly code generation project made with Java that uses ANTLR grammar. 
+C code is translated into assembly code for a virtual machine (VM).
 [TASK IN DETAIL](https://github.com/parasxdhikari/CompilerC/blob/main/CompilerQuestion.md)
 - The source code is Cymbol which is a dumbed down version of C.
 - The target code is Pcode which is a form of assembly language.
-- To simplify intermediate code generation, use StringTemplate!
-- Unit Tests are included
+- To simplify intermediate code generation, StringTemplate is used!
+- Unit Tests are included.
 - Also includes the answer for this [DSL AFSM Task](https://github.com/parasxdhikari/CompilerC/blob/main/DSLAutomaten.md) 
   
 ## Example
