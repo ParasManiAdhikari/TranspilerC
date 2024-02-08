@@ -3,6 +3,8 @@
 - The source code is Cymbol which is a dumber down version of C.
 - The target code is Pcode which is a form of assembly language.
 - To simplify intermediate code generation, use StringTemplate!
+- Unit Tests are included
+  
 ## Example
 ![image](https://github.com/parasxdhikari/CompilerC/assets/88732757/031430e7-dcd6-495f-a8b5-cfbca188f001)
 
