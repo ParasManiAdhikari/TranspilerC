@@ -9,7 +9,7 @@
 - The target code is Pcode which is very similar to assembly.
 - To simplify intermediate code generation, StringTemplate is used!
 - Unit Tests are included.
-- Also includes the answer for this [DSL AFSM Task](https://github.com/ParasManiAdhikari/CompilerC/blob/main/DSLAutomaten.md) 
+- Also includes the answer for this [DSL AFSM Task](https://github.com/ParasManiAdhikari/TranspilerC/blob/main/DSLAutomaten.md) 
   
 ## Example
 ![image](https://github.com/ParasManiAdhikari/TranspilerC/assets/88732757/9ae2b0c4-ea5a-41d7-a8d5-bfeee03c9550)
@@ -19,4 +19,4 @@
 ![image](https://github.com/ParasManiAdhikari/TranspilerC/assets/88732757/834d80bd-dac8-4a1b-b632-423b1a94cf01)
 
 
-[Main Listener File](https://github.com/ParasManiAdhikari/CompilerC/blob/main/src/main/java/zwischencode/Listener.java)
+[Main Listener File](https://github.com/ParasManiAdhikari/TranspilerC/blob/main/src/main/java/zwischencode/Listener.java)
