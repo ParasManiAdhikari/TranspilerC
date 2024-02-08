@@ -1,4 +1,0 @@
-lexFilter(tokens) ::=
-<<
-<reverse(tokens:{token|<token.text>}); separator="\n">
->>
