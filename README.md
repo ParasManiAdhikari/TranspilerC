@@ -1,6 +1,6 @@
 # C code Compiler
 ## This is a compiler project made with Java that uses ANTLR grammar. 
-The source code is translated into target code for a virtual machine (VM).
+The source code is translated into assembly code for a virtual machine (VM).
 [TASK IN DETAIL](https://github.com/parasxdhikari/CompilerC/blob/main/CompilerQuestion.md)
 - The source code is Cymbol which is a dumbed down version of C.
 - The target code is Pcode which is a form of assembly language.
