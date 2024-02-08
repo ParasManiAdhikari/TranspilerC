@@ -3,7 +3,7 @@
 ## C code -> P-Code ------ using Transpiler
 ## Run P-Code ------------ using Interpreter
 ### This is a p-code generation project made with Java that uses ANTLR grammar. 
-C code is translated into P-code ( almost assembly) for a virtual machine (VM).
+C code is translated into P-code ( almost assembly) for a virtual machine (VM). The process is called intermediate code generation.
 [TASK IN DETAIL](https://github.com/parasxdhikari/CompilerC/blob/main/CompilerQuestion.md)
 - The source code is Cymbol which is a dumbed down version of C.
 - The target code is Pcode which is very similar to assembly.
