@@ -1,10 +1,12 @@
-# Assembly Code Generator
-## This is a assembly code generation project made with Java that uses ANTLR grammar. 
-## ASSEMBLY INTERPRETER ALSO INCLUDED
-C code is translated into assembly code for a virtual machine (VM).
+# TRANSPILER + INTERPRETER
+## The assembly code is called P-code see image below.
+## C code -> P-Code   using Transpiler
+## Run P-Code           using Interpreter
+### This is a p-code generation project made with Java that uses ANTLR grammar. 
+C code is translated into P-code ( almost assembly) for a virtual machine (VM).
 [TASK IN DETAIL](https://github.com/parasxdhikari/CompilerC/blob/main/CompilerQuestion.md)
 - The source code is Cymbol which is a dumbed down version of C.
-- The target code is Pcode which is a form of assembly language.
+- The target code is Pcode which is very similar to assembly.
 - To simplify intermediate code generation, StringTemplate is used!
 - Unit Tests are included.
 - Also includes the answer for this [DSL AFSM Task](https://github.com/parasxdhikari/CompilerC/blob/main/DSLAutomaten.md) 
