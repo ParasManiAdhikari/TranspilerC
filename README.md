@@ -4,6 +4,13 @@
 - The target code is Pcode which is a form of assembly language.
 - To simplify intermediate code generation, use StringTemplate!
 - Unit Tests are included
+- Also includes domain specific language code for a Acceptor Finite State Machine Language that contains:
+    -INTERNE Domain Specific Language
+      - Object Model
+      - Fluent API
+      - Interpreter
+    - EXTERNE DSL
+      - 
   
 ## Example
 ![image](https://github.com/parasxdhikari/CompilerC/assets/88732757/031430e7-dcd6-495f-a8b5-cfbca188f001)
