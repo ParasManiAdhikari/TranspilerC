@@ -1,16 +1,11 @@
 # C code Compiler
 ## This is a compiler the source code is translated into target code for a virtual machine (VM).
+[TASK IN DETAIL](https://github.com/parasxdhikari/CompilerC/blob/main/CompilerQuestion.md)
 - The source code is Cymbol which is a dumber down version of C.
 - The target code is Pcode which is a form of assembly language.
 - To simplify intermediate code generation, use StringTemplate!
 - Unit Tests are included
-- Also includes domain specific language code for a Acceptor Finite State Machine Language that contains:
-    -INTERNE Domain Specific Language
-      - Object Model
-      - Fluent API
-      - Interpreter
-    - EXTERNE DSL
-      - 
+- Also includes the answer for this [DSL AFSM Task](https://github.com/parasxdhikari/CompilerC/blob/main/DSLAutomaten.md) 
   
 ## Example
 ![image](https://github.com/parasxdhikari/CompilerC/assets/88732757/031430e7-dcd6-495f-a8b5-cfbca188f001)
